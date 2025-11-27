@@ -14,48 +14,59 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" fillWidth="false" prefHeight="672.0" prefWidth="951.0" spacing="20.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oeqaas.Controllers.LoginController">
+<VBox alignment="CENTER" fillWidth="false" prefHeight="672.0" prefWidth="951.0" spacing="20.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oeqaas.controllers.LoginController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <StackPane prefHeight="526.0" prefWidth="847.0">
-      <children>
-         <Pane prefHeight="393.0" prefWidth="659.0">
-            <children>
-               <Button layoutX="493.0" layoutY="255.0" onAction="#GirisButton" prefHeight="30.0" prefWidth="262.0" style="-fx-background-color: #2dcc74; -fx-border-color: #ffffff; -fx-border-radius: 5;" text="Giriş" textFill="WHITE">
-                  <font>
-                     <Font name="Ebrima Bold" size="17.0" />
-                  </font>
-               </Button>
-               <TextField  cache="true" layoutX="493.0" layoutY="154.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="262.0" promptText="Ad &amp; Soyad" style="-fx-background-color: #2A363F; -fx-text-fill: white; -fx-border-color: #ffffff; -fx-border-radius: 10;" />
-               <Label fx:id="Quiz" layoutX="83.0" layoutY="342.0" prefHeight="30.0" prefWidth="312.0" text="Quiz &amp; Analysis System" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="DejaVu Sans Mono Bold" size="22.0" />
-                  </font>
-               </Label>
-               <Line endX="111.45622253417969" layoutX="417.0" layoutY="263.0" rotate="90.0" startX="-100.0" stroke="WHITE" />
-               <Circle fill="#00ff90" layoutX="29.0" layoutY="497.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="#2dcc74" layoutX="818.0" layoutY="497.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="#085303" layoutX="818.0" layoutY="32.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="#00532a" layoutX="29.0" layoutY="32.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-               <PasswordField fx:id="Sifre" layoutX="493.0" layoutY="200.0" prefHeight="39.0" prefWidth="262.0" promptText="Şifre" style="-fx-text-fill: white;-fx-background-color: #2A363F; -fx-border-color: #ffffff; -fx-border-radius: 10;" />
-               <Button layoutX="493.0" layoutY="294.0" onAction="#KayitOlButton" prefHeight="30.0" prefWidth="262.0" style="-fx-background-color: #2dcc74; -fx-border-color: #ffffff; -fx-border-radius: 5;" text="Kayıt Ol" textFill="WHITE">
-                  <font>
-                     <Font name="Ebrima Bold" size="17.0" />
-                  </font>
-               </Button>
-               <Button layoutX="493.0" layoutY="337.0" onAction="#SifremiUnuttumButton" prefHeight="30.0" prefWidth="262.0" style="-fx-background-color: #2A363F; -fx-border-color: #ffffff; -fx-border-radius: 5;" text="Şifremi Unuttum" textFill="WHITE">
-                  <font>
-                     <Font name="Ebrima Bold" size="17.0" />
-                  </font>
-               </Button>
-               <ImageView fitHeight="195.0" fitWidth="253.0" layoutX="142.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@icon1.png" />
-                  </image>
-               </ImageView>
-            </children>
-         </Pane>
-      </children>
-   </StackPane>
+    <StackPane prefHeight="526.0" prefWidth="847.0">
+        <children>
+            <Pane prefHeight="393.0" prefWidth="659.0">
+                <children>
+                    <!-- Updated onAction to GirisYapButonu -->
+                    <Button layoutX="493.0" layoutY="255.0" onAction="#GirisYapButonu" prefHeight="30.0" prefWidth="262.0" style="-fx-background-color: #2dcc74; -fx-border-color: #ffffff; -fx-border-radius: 5;" text="Giriş" textFill="WHITE">
+                        <font>
+                            <Font name="Ebrima Bold" size="17.0" />
+                        </font>
+                    </Button>
+
+                    <!-- Updated fx:id to AdSoyadAlani -->
+                    <TextField fx:id="AdSoyadAlani" cache="true" layoutX="493.0" layoutY="154.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="262.0" promptText="Ad &amp; Soyad" style="-fx-background-color: #2A363F; -fx-text-fill: white; -fx-border-color: #ffffff; -fx-border-radius: 10;" />
+
+                    <!-- Updated fx:id to DurumEtiketi -->
+                    <Label fx:id="DurumEtiketi" layoutX="83.0" layoutY="342.0" prefHeight="30.0" prefWidth="312.0" text="Quiz &amp; Analysis System" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="DejaVu Sans Mono Bold" size="22.0" />
+                        </font>
+                    </Label>
+                    <Line endX="111.45622253417969" layoutX="417.0" layoutY="263.0" rotate="90.0" startX="-100.0" stroke="WHITE" />
+                    <Circle fill="#00ff90" layoutX="29.0" layoutY="497.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                    <Circle fill="#2dcc74" layoutX="818.0" layoutY="497.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                    <Circle fill="#085303" layoutX="818.0" layoutY="32.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                    <Circle fill="#00532a" layoutX="29.0" layoutY="32.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+
+                    <!-- Updated fx:id to SifreAlani -->
+                    <PasswordField fx:id="SifreAlani" layoutX="493.0" layoutY="200.0" prefHeight="39.0" prefWidth="262.0" promptText="Şifre" style="-fx-text-fill: white;-fx-background-color: #2A363F; -fx-border-color: #ffffff; -fx-border-radius: 10;" />
+
+                    <!-- Updated onAction to KayitOlButonu -->
+                    <Button layoutX="493.0" layoutY="294.0" onAction="#KayitOlButonu" prefHeight="30.0" prefWidth="262.0" style="-fx-background-color: #2dcc74; -fx-border-color: #ffffff; -fx-border-radius: 5;" text="Kayıt Ol" textFill="WHITE">
+                        <font>
+                            <Font name="Ebrima Bold" size="17.0" />
+                        </font>
+                    </Button>
+
+                    <!-- Updated onAction to SifremiUnuttumButonu -->
+                    <Button layoutX="493.0" layoutY="337.0" onAction="#SifremiUnuttumButonu" prefHeight="30.0" prefWidth="262.0" style="-fx-background-color: #2A363F; -fx-border-color: #ffffff; -fx-border-radius: 5;" text="Şifremi Unuttum" textFill="WHITE">
+                        <font>
+                            <Font name="Ebrima Bold" size="17.0" />
+                        </font>
+                    </Button>
+                    <ImageView fitHeight="195.0" fitWidth="253.0" layoutX="142.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@icon1.png" />
+                        </image>
+                    </ImageView>
+                </children>
+            </Pane>
+        </children>
+    </StackPane>
 </VBox>

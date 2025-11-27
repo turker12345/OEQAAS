@@ -1,26 +1,33 @@
 package com.example.oeqaas;
-import javafx.scene.image.Image;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class OEQAASApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(OEQAASApplication.class.getResource("register-view.fxml"));
+    public void start(Stage anaSahne) throws IOException { // "stage" changed to "anaSahne" (Main Stage)
+        // Load the Login View first (Giriş Ekranı)
+        FXMLLoader fxmlYukleyici = new FXMLLoader(OEQAASApplication.class.getResource("login-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene sahne = new Scene(fxmlYukleyici.load(), 800, 600); // "scene" changed to "sahne"
 
-        stage.setTitle("Quiz ve Analiz Sistemi");
-        //Hata Düzeltme 3
-        // Pencere simgesini ekleme
-        Image icon = new Image(getClass().getResourceAsStream("icon1.png")); // icon.png resources klasöründe olmalı
-        stage.getIcons().add(icon);
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.show();
+        anaSahne.setTitle("Quiz ve Analiz Sistemi");
+
+        // Icon setup
+        Image ikon = new Image(getClass().getResourceAsStream("icon1.png")); // "icon" -> "ikon"
+        anaSahne.getIcons().add(ikon);
+
+        anaSahne.setScene(sahne);
+        anaSahne.setMaximized(true);
+        anaSahne.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
     }
 }
