@@ -1,3 +1,1 @@
-ALLUPPPERCASE
-PascalCase
-camelCase
+# OEQAAS
