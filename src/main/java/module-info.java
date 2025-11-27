@@ -12,4 +12,6 @@ module com.example.oeqaas {
 
     exports com.example.oeqaas.models;
     opens com.example.oeqaas.models to javafx.fxml;
+    exports com.example.oeqaas.utils;
+    opens com.example.oeqaas.utils to javafx.fxml;
 }

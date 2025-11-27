@@ -1,57 +1,57 @@
 package com.example.oeqaas.controllers;
 
-import com.example.oeqaas.OEQAASApplication;
+import com.example.oeqaas.models.User;
+import com.example.oeqaas.utils.SahneYoneticisi; // Import the Utility
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class RegisterController {
 
     @FXML
-    private TextField AdSoyadAlani; // Name Field
+    private TextField AdSoyadAlani;
 
     @FXML
-    private TextField TelefonNoAlani; // Phone Field
+    private TextField TelefonNoAlani;
 
     @FXML
-    private PasswordField SifreAlani; // Password Field
+    private PasswordField SifreAlani;
 
     @FXML
-    private PasswordField SifreTekrarAlani; // Password Confirm Field
+    private PasswordField SifreTekrarAlani;
 
     @FXML
-    private Label DurumEtiketi; // Status Label (Old: Quiz)
+    private Label DurumEtiketi;
 
     @FXML
-    protected void KayitOlButonu(ActionEvent event) { // Old: KayitOlButton
-        // Mock Registration Logic
+    protected void KayitOlButonu(ActionEvent event) {
         String adSoyad = AdSoyadAlani.getText();
+        String telefon = TelefonNoAlani.getText();
         String sifre = SifreAlani.getText();
         String sifreTekrar = SifreTekrarAlani.getText();
 
-        if (sifre.equals(sifreTekrar) && !sifre.isEmpty()) {
+        if (sifre.equals(sifreTekrar) && !sifre.isEmpty() && !adSoyad.isEmpty()) {
+
+            // 1. Create the User Model
+            User yeniKullanici = new User(adSoyad, "", sifre, telefon);
+
+            // 2. SAVE TO SHARED LIST IN LOGIN CONTROLLER
+            LoginController.kayitliKullanicilar.add(yeniKullanici);
+
             if(DurumEtiketi != null) DurumEtiketi.setText("Kayıt Başarılı! Giriş yapınız.");
-            System.out.println("Kullanıcı Kaydedildi: " + adSoyad);
+            System.out.println("Kullanıcı Kaydedildi: " + yeniKullanici.getAdSoyad());
+
         } else {
-            if(DurumEtiketi != null) DurumEtiketi.setText("Şifreler uyuşmuyor!");
+            if(DurumEtiketi != null) DurumEtiketi.setText("Şifreler uyuşmuyor veya alanlar boş!");
         }
     }
 
     @FXML
-    protected void GeriButonu(ActionEvent event) throws IOException { // Old: GeriButton
-        // Go back to Login Screen
-        FXMLLoader fxmlYukleyici = new FXMLLoader(OEQAASApplication.class.getResource("login-view.fxml"));
-        Scene sahne = new Scene(fxmlYukleyici.load());
-        Stage asama = (Stage)((Node)event.getSource()).getScene().getWindow();
-        asama.setScene(sahne);
-        asama.show();
+    protected void GeriButonu(ActionEvent event) throws IOException {
+        SahneYoneticisi.sahneDegistir(event, "login-view.fxml");
     }
 }
