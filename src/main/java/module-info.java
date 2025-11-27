@@ -7,4 +7,6 @@ module com.example.oeqaas {
 
     opens com.example.oeqaas to javafx.fxml;
     exports com.example.oeqaas;
+    exports com.example.oeqaas.Controllers;
+    opens com.example.oeqaas.Controllers to javafx.fxml;
 }

@@ -1,13 +1,12 @@
-package com.example.oeqaas;
+package com.example.oeqaas.Controllers;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
-public class HelloController {
+public class LoginController {
 
     @FXML
     public Text AdSoyadText;
