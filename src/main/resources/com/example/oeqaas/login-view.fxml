@@ -27,8 +27,8 @@
                      <Font name="Ebrima Bold" size="17.0" />
                   </font>
                </Button>
-               <TextField cache="true" layoutX="493.0" layoutY="154.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="262.0" promptText="Ad &amp; Soyad" style="-fx-background-color: #2A363F; -fx-text-fill: white; -fx-border-color: #ffffff; -fx-border-radius: 10;" />
-               <Label layoutX="83.0" layoutY="342.0" prefHeight="30.0" prefWidth="312.0" text="Quiz &amp; Analysis System" textAlignment="CENTER" textFill="WHITE">
+               <TextField  cache="true" layoutX="493.0" layoutY="154.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="262.0" promptText="Ad &amp; Soyad" style="-fx-background-color: #2A363F; -fx-text-fill: white; -fx-border-color: #ffffff; -fx-border-radius: 10;" />
+               <Label fx:id="Quiz" layoutX="83.0" layoutY="342.0" prefHeight="30.0" prefWidth="312.0" text="Quiz &amp; Analysis System" textAlignment="CENTER" textFill="WHITE">
                   <font>
                      <Font name="DejaVu Sans Mono Bold" size="22.0" />
                   </font>
@@ -38,7 +38,7 @@
                <Circle fill="#2dcc74" layoutX="818.0" layoutY="497.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
                <Circle fill="#085303" layoutX="818.0" layoutY="32.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
                <Circle fill="#00532a" layoutX="29.0" layoutY="32.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-               <PasswordField layoutX="493.0" layoutY="200.0" prefHeight="39.0" prefWidth="262.0" promptText="Şifre" style="-fx-text-fill: white;-fx-background-color: #2A363F; -fx-border-color: #ffffff; -fx-border-radius: 10;" />
+               <PasswordField fx:id="Sifre" layoutX="493.0" layoutY="200.0" prefHeight="39.0" prefWidth="262.0" promptText="Şifre" style="-fx-text-fill: white;-fx-background-color: #2A363F; -fx-border-color: #ffffff; -fx-border-radius: 10;" />
                <Button layoutX="493.0" layoutY="294.0" onAction="#KayitOlButton" prefHeight="30.0" prefWidth="262.0" style="-fx-background-color: #2dcc74; -fx-border-color: #ffffff; -fx-border-radius: 5;" text="Kayıt Ol" textFill="WHITE">
                   <font>
                      <Font name="Ebrima Bold" size="17.0" />

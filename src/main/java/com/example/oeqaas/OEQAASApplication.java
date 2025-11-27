@@ -10,7 +10,8 @@ import java.io.IOException;
 public class OEQAASApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(OEQAASApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(OEQAASApplication.class.getResource("register-view.fxml"));
+
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
 
         stage.setTitle("Quiz ve Analiz Sistemi");
