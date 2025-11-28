@@ -1,6 +1,6 @@
 package com.example.oeqaas.controllers;
 
-import com.example.oeqaas.utils.SahneYoneticisi;
+import com.example.oeqaas.utils.scaneManager;
 import com.example.oeqaas.models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,14 +59,14 @@ public class LoginController {
             // Eğer admin ise admin sayfasına, değilse test sayfasına
             if (girilenAd.equalsIgnoreCase("admin")) {
                 try {
-                    SahneYoneticisi.sahneDegistir(event, "admin-view.fxml");
+                    scaneManager.sahneDegistir(event, "admin-view.fxml");
                 } catch (IOException e) {
                     System.err.println("HATA: admin-view.fxml bulunamadı! Lütfen dosyayı oluşturduğunuzdan emin olun.");
                     DurumEtiketi.setText("Admin sayfası bulunamadı!");
                     e.printStackTrace();
                 }
             } else {
-                SahneYoneticisi.sahneDegistir(event, "user_test-view.fxml");
+                scaneManager.sahneDegistir(event, "user_test-view.fxml");
             }
 
         } else {
@@ -77,7 +77,7 @@ public class LoginController {
 
     @FXML
     protected void KayitOlButonu(ActionEvent event) throws IOException {
-        SahneYoneticisi.sahneDegistir(event, "register-view.fxml");
+        scaneManager.sahneDegistir(event, "register-view.fxml");
     }
 
     @FXML

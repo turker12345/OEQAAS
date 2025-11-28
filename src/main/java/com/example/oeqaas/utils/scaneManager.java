@@ -9,12 +9,11 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class SahneYoneticisi {
+public class scaneManager {
 
     public static void sahneDegistir(ActionEvent event, String fxmlDosyasi) throws IOException {
         FXMLLoader fxmlYukleyici = new FXMLLoader(OEQAASApplication.class.getResource(fxmlDosyasi));
         Parent yeniKok = fxmlYukleyici.load();
-
         Scene mevcutSahne = ((Node)event.getSource()).getScene();
         mevcutSahne.setRoot(yeniKok);
     }
