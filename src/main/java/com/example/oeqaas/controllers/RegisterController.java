@@ -1,11 +1,14 @@
 package com.example.oeqaas.controllers;
+
 import com.example.oeqaas.models.User;
-import com.example.oeqaas.utils.scaneManager;
+import com.example.oeqaas.utils.DataStore; // Import the DataStore
+import com.example.oeqaas.utils.ScaneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
 import java.io.IOException;
 
 public class RegisterController {
@@ -38,15 +41,16 @@ public class RegisterController {
             // 2. Create the User Model
             User yeniKullanici = new User(adSoyad, "", sifre, telefon);
 
-            // 3. Save to the shared list in LoginController (Mock Database)
-            LoginController.kayitliKullanicilar.add(yeniKullanici);
+            // 3. Save to the CENTRAL DATASTORE (This line was the problem)
+            // Instead of LoginController.kayitliKullanicilar.add(...)
+            DataStore.kullanicilar.add(yeniKullanici);
 
             System.out.println("Kullanıcı Kaydedildi: " + yeniKullanici.getAdSoyad());
 
             // 4. AUTO-REDIRECT: Send user back to Login Page immediately
             try {
                 // This line opens the Login page using your SceneManager
-                scaneManager.sahneDegistir(event, "login-view.fxml");
+                ScaneManager.sahneDegistir(event, "login-view.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
                 if(DurumEtiketi != null) DurumEtiketi.setText("Sayfa yönlendirme hatası!");
@@ -59,6 +63,6 @@ public class RegisterController {
 
     @FXML
     protected void GeriButonu(ActionEvent event) throws IOException {
-        scaneManager.sahneDegistir(event, "login-view.fxml");
+        ScaneManager.sahneDegistir(event, "login-view.fxml");
     }
 }

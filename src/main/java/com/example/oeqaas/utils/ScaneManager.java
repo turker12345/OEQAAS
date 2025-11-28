@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class scaneManager {
+public class ScaneManager {
 
     public static void sahneDegistir(ActionEvent event, String fxmlDosyasi) throws IOException {
         FXMLLoader fxmlYukleyici = new FXMLLoader(OEQAASApplication.class.getResource(fxmlDosyasi));

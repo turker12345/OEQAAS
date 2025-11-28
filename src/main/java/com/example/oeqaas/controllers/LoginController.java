@@ -1,6 +1,7 @@
 package com.example.oeqaas.controllers;
 
-import com.example.oeqaas.utils.scaneManager;
+import com.example.oeqaas.utils.ScaneManager;
+import com.example.oeqaas.utils.DataStore; // Importing the central data store
 import com.example.oeqaas.models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,76 +9,68 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoginController {
 
-    // KAYITLI KULLANICILAR (Sanal Veritabanı)
-    public static List<User> kayitliKullanicilar = new ArrayList<>();
-
-    static {
-        // Varsayılan Admin kullanıcısı
-        kayitliKullanicilar.add(new User("admin", "admin@email.com", "123", "555-5555"));
-    }
+    @FXML public TextField AdSoyadAlani;
+    @FXML public PasswordField SifreAlani;
+    @FXML private Label DurumEtiketi;
 
     @FXML
-    public TextField AdSoyadAlani;
-    @FXML
-    public PasswordField SifreAlani;
+    protected void GirisYapButonu(ActionEvent event) {
+        System.out.println("LOG: GirisYapButonu tıklandı.");
 
-    @FXML
-    private Label DurumEtiketi;
+        String girilenAd = AdSoyadAlani.getText();
+        String girilenSifre = SifreAlani.getText();
 
-    @FXML
-    protected void GirisYapButonu(ActionEvent event) throws IOException {
-        // .trim() ile kullanıcının yanlışlıkla koyduğu boşlukları siliyoruz
-        String girilenAd = AdSoyadAlani.getText().trim();
-        String girilenSifre = SifreAlani.getText().trim();
+        if (girilenAd == null || girilenSifre == null) {
+            System.out.println("LOG: Alanlar null!");
+            DurumEtiketi.setText("Lütfen alanları doldurun.");
+            return;
+        }
+
+        girilenAd = girilenAd.trim();
+        girilenSifre = girilenSifre.trim();
+
+        System.out.println("LOG: Aranan Kullanıcı: [" + girilenAd + "] Şifre: [" + girilenSifre + "]");
+        // Using DataStore instead of local list
+        System.out.println("LOG: Toplam Kayıtlı Kullanıcı Sayısı: " + DataStore.kullanicilar.size());
 
         boolean kullaniciBulundu = false;
 
-        // HATA AYIKLAMA: Konsola şu an hafızada kaç kişi olduğunu yazdırıyoruz
-        System.out.println("--- GİRİŞ DENEMESİ ---");
-        System.out.println("Girilen: '" + girilenAd + "' | Şifre: '" + girilenSifre + "'");
-        System.out.println("Hafızadaki Kayıt Sayısı: " + kayitliKullanicilar.size());
+        for(User u : DataStore.kullanicilar) {
+            System.out.println("LOG: Kontrol ediliyor -> DB Adı: [" + u.getAdSoyad() + "] DB Şifre: [" + u.getSifre() + "]");
 
-        for(User u : kayitliKullanicilar) {
-            // Konsola hafızadaki her kullanıcıyı yazdıralım ki eşleşme hatasını görelim
-            System.out.println("Kontrol Ediliyor -> Kayıtlı: '" + u.getAdSoyad() + "' | Şifre: '" + u.getSifre() + "'");
-
-            // İsimleri büyük/küçük harf duyarsız (equalsIgnoreCase), şifreyi birebir kontrol ediyoruz
             if(u.getAdSoyad().equalsIgnoreCase(girilenAd) && u.getSifre().equals(girilenSifre)) {
                 kullaniciBulundu = true;
+                System.out.println("LOG: EŞLEŞME BULUNDU!");
                 break;
             }
         }
 
         if (kullaniciBulundu) {
-            System.out.println("SONUÇ: Başarılı!");
-
-            // Eğer admin ise admin sayfasına, değilse test sayfasına
-            if (girilenAd.equalsIgnoreCase("admin")) {
-                try {
-                    scaneManager.sahneDegistir(event, "admin-view.fxml");
-                } catch (IOException e) {
-                    System.err.println("HATA: admin-view.fxml bulunamadı! Lütfen dosyayı oluşturduğunuzdan emin olun.");
-                    DurumEtiketi.setText("Admin sayfası bulunamadı!");
-                    e.printStackTrace();
+            try {
+                if (girilenAd.equalsIgnoreCase("admin")) {
+                    System.out.println("LOG: Admin paneline yönlendiriliyor...");
+                    ScaneManager.sahneDegistir(event, "admin-view.fxml");
+                } else {
+                    System.out.println("LOG: Test paneline yönlendiriliyor...");
+                    ScaneManager.sahneDegistir(event, "user_test-view.fxml");
                 }
-            } else {
-                scaneManager.sahneDegistir(event, "user_test-view.fxml");
+            } catch (IOException e) {
+                System.err.println("LOG: SAHNE DEĞİŞTİRME HATASI!");
+                e.printStackTrace();
+                DurumEtiketi.setText("Sayfa yüklenemedi: " + e.getCause());
             }
-
         } else {
-            System.out.println("SONUÇ: Başarısız. Eşleşme yok.");
-            DurumEtiketi.setText("Kullanıcı adı veya şifre hatalı!");
+            System.out.println("LOG: Kullanıcı bulunamadı.");
+            DurumEtiketi.setText("Hatalı Şifre veya Kullanıcı!");
         }
     }
 
     @FXML
     protected void KayitOlButonu(ActionEvent event) throws IOException {
-        scaneManager.sahneDegistir(event, "register-view.fxml");
+        ScaneManager.sahneDegistir(event, "register-view.fxml");
     }
 
     @FXML
