@@ -19,7 +19,7 @@
                     <children>
                         <Circle fill="#b1b1b1" layoutX="426.0" layoutY="44.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
                         <ImageView fitHeight="60.0" fitWidth="64.0" layoutX="396.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
+                            <image>e
                                 <Image url="@icon1.png" />
                             </image>
                         </ImageView>

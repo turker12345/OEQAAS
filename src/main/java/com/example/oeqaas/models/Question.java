@@ -16,7 +16,6 @@ public class Question {
         this.secenekD = secenekD;
         this.dogruCevap = dogruCevap;
     }
-
     public String getSoruMetni() { return soruMetni; }
     public String getSecenekA() { return secenekA; }
     public String getSecenekB() { return secenekB; }

@@ -1,7 +1,7 @@
 package com.example.oeqaas.controllers;
 
 import com.example.oeqaas.models.User;
-import com.example.oeqaas.utils.SahneYoneticisi; // Import the Utility
+import com.example.oeqaas.utils.SahneYoneticisi;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -34,16 +34,25 @@ public class RegisterController {
         String sifre = SifreAlani.getText();
         String sifreTekrar = SifreTekrarAlani.getText();
 
+        // 1. Validate inputs (Boş mu? Şifreler aynı mı?)
         if (sifre.equals(sifreTekrar) && !sifre.isEmpty() && !adSoyad.isEmpty()) {
 
-            // 1. Create the User Model
+            // 2. Create the User Model
             User yeniKullanici = new User(adSoyad, "", sifre, telefon);
 
-            // 2. SAVE TO SHARED LIST IN LOGIN CONTROLLER
+            // 3. Save to the shared list in LoginController (Mock Database)
             LoginController.kayitliKullanicilar.add(yeniKullanici);
 
-            if(DurumEtiketi != null) DurumEtiketi.setText("Kayıt Başarılı! Giriş yapınız.");
             System.out.println("Kullanıcı Kaydedildi: " + yeniKullanici.getAdSoyad());
+
+            // 4. AUTO-REDIRECT: Send user back to Login Page immediately
+            try {
+                // This line opens the Login page using your SceneManager
+                SahneYoneticisi.sahneDegistir(event, "login-view.fxml");
+            } catch (IOException e) {
+                e.printStackTrace();
+                if(DurumEtiketi != null) DurumEtiketi.setText("Sayfa yönlendirme hatası!");
+            }
 
         } else {
             if(DurumEtiketi != null) DurumEtiketi.setText("Şifreler uyuşmuyor veya alanlar boş!");
