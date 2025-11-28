@@ -19,7 +19,7 @@ public class DataStore {
         kullanicilar.add(new User("admin", "admin@email.com", "123", "555-0000"));
 
         // Sample Student
-        User ogrenci = new User("Ahmet Yilmaz", "ahmet@mail.com", "123", "555-1234");
+        User ogrenci = new User("Yunus AKAY", "yunusakay44@mail.com", "123", "555-1234");
         kullanicilar.add(ogrenci);
 
         // Sample Test
