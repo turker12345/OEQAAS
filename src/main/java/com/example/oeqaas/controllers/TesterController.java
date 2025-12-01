@@ -43,7 +43,11 @@ public class TesterController {
                 Quiz.setText((aktifSoruIndeksi + 1) + ") " + aktifSoru.getSoruMetni());
             }
         } else {
-            if (Quiz != null) Quiz.setText("Test Bitti! Tebrikler.");
+            if (Quiz != null) {
+                Quiz.setText("Test Bitti! Tebrikler!.");
+                Quiz.setText("Sonuçlarınızı Kontrol Edin.");
+            }
+
         }
     }
 
