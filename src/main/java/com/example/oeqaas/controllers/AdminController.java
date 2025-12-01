@@ -1,5 +1,4 @@
 package com.example.oeqaas.controllers;
-
 import com.example.oeqaas.models.Question;
 import com.example.oeqaas.models.Test;
 import com.example.oeqaas.models.User;
@@ -11,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.io.IOException;
 
 public class AdminController {
