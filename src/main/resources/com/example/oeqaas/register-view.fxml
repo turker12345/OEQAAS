@@ -67,6 +67,11 @@
                     <PasswordField fx:id="SifreTekrarAlani" layoutX="493.0" layoutY="244.0" prefHeight="39.0" prefWidth="262.0" promptText="Şifre Tekrar" style="-fx-text-fill: white;-fx-background-color: #2A363F; -fx-border-color: #ffffff; -fx-border-radius: 10;" />
 
                     <Line endX="185.39964294433594" endY="1.4000427722930908" layoutX="381.0" layoutY="238.0" rotate="90.0" startX="-100.0" stroke="#a6a6a6" />
+               <Label fx:id="DurumEtiketi1" layoutX="571.0" layoutY="47.0" prefHeight="30.0" prefWidth="106.0" text="Kayıt Ol" textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                     <Font name="DejaVu Sans Mono Bold" size="22.0" />
+                  </font>
+               </Label>
                 </children>
             </Pane>
         </children>

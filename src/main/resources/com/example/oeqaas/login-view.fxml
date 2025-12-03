@@ -65,6 +65,11 @@
                             <Image url="@icon1.png" />
                         </image>
                     </ImageView>
+               <Label fx:id="DurumEtiketi1" layoutX="564.0" layoutY="58.0" prefHeight="30.0" prefWidth="121.0" text="Giriş Yap" textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                     <Font name="DejaVu Sans Mono Bold" size="22.0" />
+                  </font>
+               </Label>
                 </children>
             </Pane>
         </children>

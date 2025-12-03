@@ -73,6 +73,7 @@ public class AdminController {
 
             lblUserMsg.setText("Kullanıcı başarıyla eklendi.");
             clearUserInputs();
+            userTable.getSelectionModel().clearSelection(); // UX İyileştirme: Seçimi temizle
         } else {
             lblUserMsg.setText("Hata: Ad ve Şifre zorunludur!");
         }
@@ -81,7 +82,8 @@ public class AdminController {
     @FXML
     void updateUser() {
         User selected = userTable.getSelectionModel().getSelectedItem();
-        if (selected != null) {
+        // Güncelleme yapabilmek için hem seçili bir kullanıcı hem de zorunlu alanlar olmalı
+        if (selected != null && !txtName.getText().isEmpty() && !txtPass.getText().isEmpty()) {
             // Update the object directly (Model)
             selected.setAdSoyad(txtName.getText());
             selected.setSifre(txtPass.getText());
@@ -90,7 +92,14 @@ public class AdminController {
             // Refresh UI
             userTable.refresh();
             resultUserList.refresh();
-            lblUserMsg.setText("Kullanıcı güncellendi.");
+
+            lblUserMsg.setText("Kullanıcı başarıyla güncellendi.");
+            clearUserInputs(); // DÜZELTME & UX İyileştirme: Girişleri temizle
+            userTable.getSelectionModel().clearSelection(); // UX İyileştirme: Seçimi temizle
+        } else if (selected == null) {
+            lblUserMsg.setText("Hata: Güncellemek için bir kullanıcı seçiniz.");
+        } else {
+            lblUserMsg.setText("Hata: Ad ve Şifre zorunludur!");
         }
     }
 
@@ -102,6 +111,9 @@ public class AdminController {
             userObservableList.setAll(DataStore.kullanicilar);
             lblUserMsg.setText("Kullanıcı silindi.");
             clearUserInputs();
+            userTable.getSelectionModel().clearSelection(); // UX İyileştirme: Seçimi temizle
+        } else {
+            lblUserMsg.setText("Hata: Silmek için bir kullanıcı seçiniz.");
         }
     }
 
@@ -113,11 +125,13 @@ public class AdminController {
             txtName.setText(selected.getAdSoyad());
             txtPass.setText(selected.getSifre());
             txtPhone.setText(selected.getTelefon());
+            lblUserMsg.setText(""); // Seçim yapıldığında mesajı temizle
         }
     }
 
     private void clearUserInputs() {
         txtName.clear(); txtPass.clear(); txtPhone.clear();
+        lblUserMsg.setText(""); // UX İyileştirme: Mesajı temizle
     }
 
     // ================= TEST OPERATIONS =================
@@ -128,6 +142,9 @@ public class AdminController {
             DataStore.testler.add(newTest);
             quizObservableList.setAll(DataStore.testler);
             txtQuizName.clear();
+            lblQuizMsg.setText("Test başarıyla oluşturuldu."); // UX İyileştirme
+        } else {
+            lblQuizMsg.setText("Hata: Lütfen test adı girin."); // UX İyileştirme
         }
     }
 
@@ -139,6 +156,9 @@ public class AdminController {
             quizObservableList.setAll(DataStore.testler);
             lblSelectedQuiz.setText("Seçili Test: Yok");
             btnAddQuestion.setDisable(true);
+            lblQuizMsg.setText(selected.getAd() + " testi silindi."); // UX İyileştirme
+        } else {
+            lblQuizMsg.setText("Hata: Lütfen silmek için bir test seçin."); // UX İyileştirme
         }
     }
 
@@ -148,28 +168,49 @@ public class AdminController {
         if (selected != null) {
             lblSelectedQuiz.setText("Seçili Test: " + selected.getAd());
             btnAddQuestion.setDisable(false);
+            lblQuizMsg.setText("Soru eklemeye hazırsınız."); // UX İyileştirme
         }
     }
 
     @FXML
     void addQuestionToQuiz() {
         Test selected = quizList.getSelectionModel().getSelectedItem();
-        // Check if everything is filled
-        if (selected != null && comboCorrect.getValue() != null && !txtQuestion.getText().isEmpty()) {
 
+        // HATA DÜZELTME: Question constructor hatası almamak ve doğru veri girmek için
+        // tüm şık alanlarının doldurulup doldurulmadığı kontrol edilir.
+        boolean inputsValid = selected != null
+                && comboCorrect.getValue() != null
+                && !txtQuestion.getText().isEmpty()
+                && !txtOptA.getText().isEmpty()
+                && !txtOptB.getText().isEmpty()
+                && !txtOptC.getText().isEmpty()
+                && !txtOptD.getText().isEmpty(); // Kritik Kontroller Eklendi
+
+        if (inputsValid) { // Satır 162'nin yeni karşılığı
+
+            // Satır 166: Question constructor çağrısı, artık tüm alanlar dolu olduğu için güvenli.
             Question q = new Question(
                     txtQuestion.getText(),
-                    txtOptA.getText(), txtOptB.getText(), txtOptC.getText(), txtOptD.getText(),
+                    txtOptA.getText(),
+                    txtOptB.getText(),
+                    txtOptC.getText(),
+                    txtOptD.getText(),
                     comboCorrect.getValue()
             );
 
             selected.soruEkle(q);
-            lblQuizMsg.setText("Soru eklendi! (Toplam: " + selected.getSorular().size() + ")");
+            lblQuizMsg.setText("Soru başarıyla eklendi! (Toplam: " + selected.getSorular().size() + ")");
 
-            // Clear Question Inputs
-            txtQuestion.clear(); txtOptA.clear(); txtOptB.clear(); txtOptC.clear(); txtOptD.clear();
+            // Clear Question Inputs (UX İyileştirme)
+            txtQuestion.clear();
+            txtOptA.clear();
+            txtOptB.clear();
+            txtOptC.clear();
+            txtOptD.clear();
+            comboCorrect.getSelectionModel().clearSelection(); // ComboBox'ı da temizle
         } else {
-            lblQuizMsg.setText("Lütfen bir test seçin ve tüm alanları doldurun.");
+            // Hata mesajı düzeltildi
+            lblQuizMsg.setText("Hata: Lütfen bir test seçin ve Soru metni, tüm şıklar (A, B, C, D) ve Doğru Cevap'ı doldurun.");
         }
     }
 
@@ -179,11 +220,14 @@ public class AdminController {
         User selected = resultUserList.getSelectionModel().getSelectedItem();
         if (selected != null) {
             // Show that user's history in the list
-            if (selected.getQuizGeçmişi() != null) {
+            if (selected.getQuizGeçmişi() != null && !selected.getQuizGeçmişi().isEmpty()) { // Boş liste kontrolü eklendi
                 resultHistoryList.setItems(FXCollections.observableArrayList(selected.getQuizGeçmişi()));
             } else {
                 resultHistoryList.getItems().clear();
+                resultHistoryList.getItems().add("Seçili kullanıcının test geçmişi bulunmamaktadır."); // UX İyileştirme
             }
+        } else {
+            resultHistoryList.getItems().clear();
         }
     }
 

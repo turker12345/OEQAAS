@@ -54,7 +54,7 @@ public class LoginController {
                     ScaneManager.sahneDegistir(event, "admin-view.fxml");
                 } else {
                     System.out.println("LOG: Test paneline yönlendiriliyor...");
-                    ScaneManager.sahneDegistir(event, "user_test-view.fxml");
+                    ScaneManager.sahneDegistir(event, "user_test_selection-view.fxml");
                 }
             } catch (IOException e) {
                 System.err.println("LOG: SAHNE DEĞİŞTİRME HATASI!");
