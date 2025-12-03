@@ -70,6 +70,11 @@
                      <Font name="DejaVu Sans Mono Bold" size="22.0" />
                   </font>
                </Label>
+               <Label layoutX="271.0" layoutY="482.0" prefHeight="30.0" prefWidth="302.0" text="Quiz &amp; Analysis System ©2025 Tüm hakları saklıdır." textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                     <Font name="DejaVu Sans Mono Bold" size="10.0" />
+                  </font>
+               </Label>
                 </children>
             </Pane>
         </children>

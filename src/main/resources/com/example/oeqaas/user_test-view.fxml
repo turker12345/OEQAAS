@@ -12,12 +12,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="898.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="898.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oeqaas.controllers.UserTestController">
    <children>
       <StackPane prefHeight="640.0" prefWidth="898.0">
          <children>
-            <Pane prefHeight="482.0" prefWidth="692.0">
+            <Pane prefHeight="482.0" prefWidth="692.0" StackPane.alignment="CENTER">
                <children>
                   <Label layoutX="241.0" layoutY="132.0" text="1." textFill="WHITE">
                      <font>
@@ -118,7 +117,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="17.0" layoutY="581.0" mnemonicParsing="false" onAction="#cikisYap" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Geri" />
+                  <Button layoutX="17.0" layoutY="581.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Geri" />
                </children>
             </Pane>
          </children>

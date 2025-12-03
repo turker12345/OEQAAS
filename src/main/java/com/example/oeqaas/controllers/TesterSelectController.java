@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TesterController {
+public class TesterSelectController {
 
     @FXML
     private Label DogruSayisiEtiketi;
