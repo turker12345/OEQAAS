@@ -22,7 +22,6 @@ public class DataStore {
         User ogrenci = new User("Yunus AKAY", "yunusakay44@mail.com", "123", "555-1234");
         kullanicilar.add(ogrenci);
 
-        // Sample Test
         Test javaTest = new Test("Java Temelleri");
         javaTest.soruEkle(new Question("Java'da hangisi döngüdür?", "if", "for", "int", "class", "B"));
         javaTest.soruEkle(new Question("int kaç bittir?", "8", "16", "32", "64", "C"));
