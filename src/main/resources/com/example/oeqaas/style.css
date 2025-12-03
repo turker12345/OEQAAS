@@ -1,0 +1,16 @@
+.progress-bar {
+    -fx-background-color: transparent; /* Dış arka plan */
+}
+
+.progress-bar > .track {
+    -fx-background-color: transparent; /* İç track (boş alan) */
+}
+
+.progress-bar > .bar {
+    -fx-background-color: #258ced; /* Doluluk rengi — istediğini koyabilirsin */
+}
+.tab-pane .tab-header-area .tab-label {
+    -fx-text-fill: rgb(209, 208, 208);   /* Yazı rengi */
+    -fx-font-weight: bold; /* (İsteğe bağlı) kalın yap */
+    -fx-font-size: 14px;   /* (İsteğe bağlı) boyut */
+}
