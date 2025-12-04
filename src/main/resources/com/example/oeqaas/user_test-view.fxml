@@ -34,7 +34,6 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Circle fill="#00ff90" layoutX="50.0" layoutY="592.0" opacity="0.03" radius="33.0" stroke="#04f789" strokeType="INSIDE" />
                   <Arc fill="#00ff90" layoutX="59.0" layoutY="60.0" length="270.0" radiusX="44.0" radiusY="44.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" style="-fx-rotate: 315;" type="ROUND" />
                   <Button layoutX="100.0" layoutY="308.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 25; -fx-background-color: #0976e2; -fx-border-color: #ffffff; -fx-border-radius: 25;" text="B)">
                      <font>
@@ -76,22 +75,12 @@
                         <Font name="Ebrima" size="19.0" />
                      </font>
                   </Label>
-                  <Button layoutX="276.0" layoutY="574.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="135.0" style="-fx-background-color: fc813f;" text="Önceki Soru">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="486.0" layoutY="574.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="135.0" style="-fx-background-color: f9d73e;" text="Sonraki Soru">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="226.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
+                  <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="367.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
                      <image>
                         <Image url="@ok.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="621.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
+                  <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="482.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
                      <image>
                         <Image url="@ok.png" />
                      </image>
@@ -101,13 +90,8 @@
                         <Image url="@icon1.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="334.0" layoutY="51.0" text="Örnek Resim" textFill="WHITE">
-                     <font>
-                        <Font size="41.0" />
-                     </font>
-                  </Label>
                   <Circle fill="#00ff90" layoutX="857.0" layoutY="589.0" opacity="0.44" radius="33.0" stroke="#04f789" strokeType="INSIDE" />
-                  <TextField fx:id="AdSoyadAlani" cache="true" layoutX="423.0" layoutY="529.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="53.0" promptText="Soru Sayısı" style="-fx-background-color: #2A363F; -fx-text-fill: white; -fx-border-color: #ffffff; -fx-border-radius: 10;">
+                  <TextField fx:id="AdSoyadAlani" cache="true" layoutX="416.0" layoutY="529.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="66.0" promptText="soru numarası" style="-fx-background-color: #2A363F; -fx-text-fill: white; -fx-border-color: #ffffff; -fx-border-radius: 10;">
                      <font>
                         <Font name="System Bold" size="8.0" />
                      </font>
@@ -117,7 +101,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="17.0" layoutY="581.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Geri" />
+                  <Button layoutX="32.0" layoutY="575.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="66.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Geri" />
                </children>
             </Pane>
          </children>

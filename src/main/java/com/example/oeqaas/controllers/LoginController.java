@@ -1,6 +1,7 @@
 package com.example.oeqaas.controllers;
+
 import com.example.oeqaas.utils.ScaneManager;
-import com.example.oeqaas.utils.DataStore; // Importing the central data store
+import com.example.oeqaas.utils.DataStore;
 import com.example.oeqaas.models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,52 +18,41 @@ public class LoginController {
 
     @FXML
     protected void GirisYapButonu(ActionEvent event) {
-        System.out.println("LOG: GirisYapButonu tıklandı.");
+        String girilenAd = AdSoyadAlani.getText().trim();
+        String girilenSifre = SifreAlani.getText().trim();
 
-        String girilenAd = AdSoyadAlani.getText();
-        String girilenSifre = SifreAlani.getText();
-
-        if (girilenAd == null || girilenSifre == null) {
-            System.out.println("LOG: Alanlar null!");
+        if (girilenAd.isEmpty() || girilenSifre.isEmpty()) {
             DurumEtiketi.setText("Lütfen alanları doldurun.");
             return;
         }
 
-        girilenAd = girilenAd.trim();
-        girilenSifre = girilenSifre.trim();
-
-        System.out.println("LOG: Aranan Kullanıcı: [" + girilenAd + "] Şifre: [" + girilenSifre + "]");
-        // Using DataStore instead of local list
-        System.out.println("LOG: Toplam Kayıtlı Kullanıcı Sayısı: " + DataStore.kullanicilar.size());
+        System.out.println("Giriş Denemesi: " + girilenAd);
 
         boolean kullaniciBulundu = false;
 
+        // Check DataStore
         for(User u : DataStore.kullanicilar) {
-            System.out.println("LOG: Kontrol ediliyor -> DB Adı: [" + u.getAdSoyad() + "] DB Şifre: [" + u.getSifre() + "]");
-
             if(u.getAdSoyad().equalsIgnoreCase(girilenAd) && u.getSifre().equals(girilenSifre)) {
                 kullaniciBulundu = true;
-                System.out.println("LOG: EŞLEŞME BULUNDU!");
                 break;
             }
         }
 
         if (kullaniciBulundu) {
+            System.out.println("Giriş Başarılı!");
             try {
                 if (girilenAd.equalsIgnoreCase("admin")) {
-                    System.out.println("LOG: Admin paneline yönlendiriliyor...");
-                    ScaneManager.sahneDegistir(event, "admin-view.fxml");
+                    ScaneManager.sahneDegistir(event, "admin_test-view.fxml");
                 } else {
-                    System.out.println("LOG: Test paneline yönlendiriliyor...");
+                    // FIXED: Go to Selection Screen first, not the Test directly
                     ScaneManager.sahneDegistir(event, "user_test_selection-view.fxml");
                 }
             } catch (IOException e) {
-                System.err.println("LOG: SAHNE DEĞİŞTİRME HATASI!");
                 e.printStackTrace();
-                DurumEtiketi.setText("Sayfa yüklenemedi: " + e.getCause());
+                DurumEtiketi.setText("Sayfa açılamadı: Dosya bulunamadı!");
+                System.err.println("Hata Detayı: " + e.getMessage());
             }
         } else {
-            System.out.println("LOG: Kullanıcı bulunamadı.");
             DurumEtiketi.setText("Hatalı Şifre veya Kullanıcı!");
         }
     }
