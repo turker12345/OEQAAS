@@ -2,7 +2,7 @@ package com.example.oeqaas.controllers;
 
 import com.example.oeqaas.models.User;
 import com.example.oeqaas.utils.DataStore; // Import the DataStore
-import com.example.oeqaas.utils.ScaneManager;
+import com.example.oeqaas.utils.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -50,7 +50,7 @@ public class RegisterController {
             // 4. AUTO-REDIRECT: Send user back to Login Page immediately
             try {
                 // This line opens the Login page using your SceneManager
-                ScaneManager.sahneDegistir(event, "login-view.fxml");
+                SceneManager.sahneDegistir(event, "login-view.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
                 if(DurumEtiketi != null) DurumEtiketi.setText("Sayfa yönlendirme hatası!");
@@ -63,6 +63,6 @@ public class RegisterController {
 
     @FXML
     protected void GeriButonu(ActionEvent event) throws IOException {
-        ScaneManager.sahneDegistir(event, "login-view.fxml");
+        SceneManager.sahneDegistir(event, "login-view.fxml");
     }
 }

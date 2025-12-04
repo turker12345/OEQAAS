@@ -9,12 +9,16 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class ScaneManager {
+public class SceneManager {
 
+    // Helper method to switch scenes
     public static void sahneDegistir(ActionEvent event, String fxmlDosyasi) throws IOException {
         FXMLLoader fxmlYukleyici = new FXMLLoader(OEQAASApplication.class.getResource(fxmlDosyasi));
         Parent yeniKok = fxmlYukleyici.load();
-        Scene mevcutSahne = ((Node)event.getSource()).getScene();
-        mevcutSahne.setRoot(yeniKok);
+
+        if (event != null && event.getSource() instanceof Node) {
+            Scene mevcutSahne = ((Node)event.getSource()).getScene();
+            mevcutSahne.setRoot(yeniKok);
+        }
     }
 }

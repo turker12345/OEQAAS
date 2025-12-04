@@ -3,7 +3,7 @@ package com.example.oeqaas.controllers;
 import com.example.oeqaas.models.Question;
 import com.example.oeqaas.models.Test;
 import com.example.oeqaas.utils.DataStore;
-import com.example.oeqaas.utils.ScaneManager;
+import com.example.oeqaas.utils.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -48,6 +48,6 @@ public class UserTestController {
 
     @FXML
     public void geriDon(ActionEvent event) throws IOException {
-        ScaneManager.sahneDegistir(event, "user_test_selection-view.fxml");
+        SceneManager.sahneDegistir(event, "user_test_selection-view.fxml");
     }
 }

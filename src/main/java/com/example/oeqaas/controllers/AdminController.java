@@ -3,7 +3,7 @@ import com.example.oeqaas.models.Question;
 import com.example.oeqaas.models.Test;
 import com.example.oeqaas.models.User;
 import com.example.oeqaas.utils.DataStore;
-import com.example.oeqaas.utils.ScaneManager; // Use your existing utility name
+import com.example.oeqaas.utils.SceneManager; // Use your existing utility name
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -231,6 +231,6 @@ public class AdminController {
 
     @FXML
     void cikisYap(ActionEvent event) throws IOException {
-        ScaneManager.sahneDegistir(event, "login-view.fxml");
+        SceneManager.sahneDegistir(event, "login-view.fxml");
     }
 }

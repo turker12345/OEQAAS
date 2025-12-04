@@ -1,6 +1,6 @@
 package com.example.oeqaas.controllers;
 
-import com.example.oeqaas.utils.ScaneManager;
+import com.example.oeqaas.utils.SceneManager;
 import com.example.oeqaas.utils.DataStore;
 import com.example.oeqaas.models.User;
 import javafx.event.ActionEvent;
@@ -42,10 +42,10 @@ public class LoginController {
             System.out.println("Giriş Başarılı!");
             try {
                 if (girilenAd.equalsIgnoreCase("admin")) {
-                    ScaneManager.sahneDegistir(event, "admin_test-view.fxml");
+                    SceneManager.sahneDegistir(event, "admin_test-view.fxml");
                 } else {
                     // FIXED: Go to Selection Screen first, not the Test directly
-                    ScaneManager.sahneDegistir(event, "user_test_selection-view.fxml");
+                    SceneManager.sahneDegistir(event, "user_test_selection-view.fxml");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -59,7 +59,7 @@ public class LoginController {
 
     @FXML
     protected void KayitOlButonu(ActionEvent event) throws IOException {
-        ScaneManager.sahneDegistir(event, "register-view.fxml");
+        SceneManager.sahneDegistir(event, "register-view.fxml");
     }
 
     @FXML
