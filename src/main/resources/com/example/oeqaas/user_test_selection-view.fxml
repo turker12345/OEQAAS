@@ -47,8 +47,8 @@
                             </font>
                         </Label>
 
-                        <!-- "Test - 1" Button: This is what the user clicks to START the quiz -->
-                        <Button layoutX="52.0" layoutY="153.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="302.0" style="-fx-background-color: #00ff90; -fx-background-radius: 15; -fx-border-color: #ffffff; -fx-border-radius: 15;" text="Test - 1" textFill="WHITE">
+                        <!-- "Test - 1" Button: Added onAction="#testBaslat" -->
+                        <Button layoutX="52.0" layoutY="153.0" mnemonicParsing="false" onAction="#testBaslat" prefHeight="79.0" prefWidth="302.0" style="-fx-background-color: #00ff90; -fx-background-radius: 15; -fx-border-color: #ffffff; -fx-border-radius: 15;" text="Test - 1" textFill="WHITE">
                             <font>
                                 <Font name="Ebrima" size="27.0" />
                             </font>
@@ -66,8 +66,6 @@
                                 <Font name="DejaVu Sans Mono Bold" size="22.0" />
                             </font>
                         </Label>
-
-                        <!-- REMOVED THE DYNAMIC QUESTION LABEL HERE -->
 
                     </children>
                 </Pane>

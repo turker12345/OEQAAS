@@ -1,8 +1,8 @@
 package com.example.oeqaas.controllers;
 
 import com.example.oeqaas.models.User;
-import com.example.oeqaas.utils.DataStore; // Import the DataStore
-import com.example.oeqaas.utils.SceneManager;
+import com.example.oeqaas.utils.DataStore;
+import com.example.oeqaas.utils.SceneManager; // FIXED IMPORT (was ScaneManager)
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,20 +13,11 @@ import java.io.IOException;
 
 public class RegisterController {
 
-    @FXML
-    private TextField AdSoyadAlani;
-
-    @FXML
-    private TextField TelefonNoAlani;
-
-    @FXML
-    private PasswordField SifreAlani;
-
-    @FXML
-    private PasswordField SifreTekrarAlani;
-
-    @FXML
-    private Label DurumEtiketi;
+    @FXML private TextField AdSoyadAlani;
+    @FXML private TextField TelefonNoAlani;
+    @FXML private PasswordField SifreAlani;
+    @FXML private PasswordField SifreTekrarAlani;
+    @FXML private Label DurumEtiketi;
 
     @FXML
     protected void KayitOlButonu(ActionEvent event) {
@@ -35,34 +26,30 @@ public class RegisterController {
         String sifre = SifreAlani.getText();
         String sifreTekrar = SifreTekrarAlani.getText();
 
-        // 1. Validate inputs (Boş mu? Şifreler aynı mı?)
         if (sifre.equals(sifreTekrar) && !sifre.isEmpty() && !adSoyad.isEmpty()) {
 
-            // 2. Create the User Model
+            // Save User
             User yeniKullanici = new User(adSoyad, "", sifre, telefon);
-
-            // 3. Save to the CENTRAL DATASTORE (This line was the problem)
-            // Instead of LoginController.kayitliKullanicilar.add(...)
             DataStore.kullanicilar.add(yeniKullanici);
+            System.out.println("Kayıt Başarılı: " + adSoyad);
 
-            System.out.println("Kullanıcı Kaydedildi: " + yeniKullanici.getAdSoyad());
-
-            // 4. AUTO-REDIRECT: Send user back to Login Page immediately
+            // Redirect to Login Page
             try {
-                // This line opens the Login page using your SceneManager
+                // Using SceneManager (correct spelling)
                 SceneManager.sahneDegistir(event, "login-view.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
-                if(DurumEtiketi != null) DurumEtiketi.setText("Sayfa yönlendirme hatası!");
+                if(DurumEtiketi != null) DurumEtiketi.setText("Sayfa hatası: " + e.getMessage());
             }
 
         } else {
-            if(DurumEtiketi != null) DurumEtiketi.setText("Şifreler uyuşmuyor veya alanlar boş!");
+            if(DurumEtiketi != null) DurumEtiketi.setText("Hatalı bilgi veya şifreler uyuşmuyor!");
         }
     }
 
     @FXML
     protected void GeriButonu(ActionEvent event) throws IOException {
+        // Go back to Login Page
         SceneManager.sahneDegistir(event, "login-view.fxml");
     }
 }
