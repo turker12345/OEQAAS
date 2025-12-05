@@ -1,0 +1,87 @@
+[
+  {
+    "ad": "Test 1 - Genel Kültür",
+    "sorular": [
+      {
+        "soruMetni": "Türkiye'nin başkenti neresidir?",
+        "secenekA": "İstanbul",
+        "secenekB": "Ankara",
+        "secenekC": "İzmir",
+        "secenekD": "Bursa",
+        "dogruCevap": "B"
+      },
+      {
+        "soruMetni": "Hangisi bir programlama dilidir?",
+        "secenekA": "HTML",
+        "secenekB": "CSS",
+        "secenekC": "Java",
+        "secenekD": "JPEG",
+        "dogruCevap": "C"
+      },
+      {
+        "soruMetni": "Su kaç derecede kaynar (deniz seviyesinde)?",
+        "secenekA": "50",
+        "secenekB": "90",
+        "secenekC": "100",
+        "secenekD": "120",
+        "dogruCevap": "C"
+      },
+      {
+        "soruMetni": "Mustafa Kemal Atatürk hangi yılda doğmuştur?",
+        "secenekA": "1881",
+        "secenekB": "1923",
+        "secenekC": "1938",
+        "secenekD": "1885",
+        "dogruCevap": "A"
+      },
+      {
+        "soruMetni": "Güneş sistemindeki en büyük gezegen hangisidir?",
+        "secenekA": "Mars",
+        "secenekB": "Dünya",
+        "secenekC": "Jüpiter",
+        "secenekD": "Satürn",
+        "dogruCevap": "C"
+      },
+      {
+        "soruMetni": "Bir futbol takımı sahada kaç kişiyle oynar?",
+        "secenekA": "7",
+        "secenekB": "10",
+        "secenekC": "11",
+        "secenekD": "12",
+        "dogruCevap": "C"
+      },
+      {
+        "soruMetni": "Hangisi doğal bir ışık kaynağıdır?",
+        "secenekA": "Ampul",
+        "secenekB": "Güneş",
+        "secenekC": "El Feneri",
+        "secenekD": "Mum",
+        "dogruCevap": "B"
+      },
+      {
+        "soruMetni": "İstiklal Marşı'mızın şairi kimdir?",
+        "secenekA": "Nazım Hikmet",
+        "secenekB": "Mehmet Akif Ersoy",
+        "secenekC": "Orhan Veli",
+        "secenekD": "Cahit Sıtkı Tarancı",
+        "dogruCevap": "B"
+      },
+      {
+        "soruMetni": "2 + 2 x 2 işleminin sonucu kaçtır?",
+        "secenekA": "8",
+        "secenekB": "6",
+        "secenekC": "4",
+        "secenekD": "10",
+        "dogruCevap": "B"
+      },
+      {
+        "soruMetni": "Fatih Sultan Mehmet İstanbul'u kaç yılında fethetmiştir?",
+        "secenekA": "1071",
+        "secenekB": "1299",
+        "secenekC": "1453",
+        "secenekD": "1923",
+        "dogruCevap": "C"
+      }
+    ]
+  }
+]

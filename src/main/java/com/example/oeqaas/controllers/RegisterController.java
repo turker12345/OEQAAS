@@ -1,15 +1,16 @@
 package com.example.oeqaas.controllers;
 
-import com.example.oeqaas.models.User;
-import com.example.oeqaas.utils.DataStore;
-import com.example.oeqaas.utils.SceneManager; // FIXED IMPORT (was ScaneManager)
+import com.example.oeqaas.utils.SceneManager;
+import com.example.oeqaas.utils.VeritabaniBaglantisi;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class RegisterController {
 
@@ -28,28 +29,34 @@ public class RegisterController {
 
         if (sifre.equals(sifreTekrar) && !sifre.isEmpty() && !adSoyad.isEmpty()) {
 
-            // Save User
-            User yeniKullanici = new User(adSoyad, "", sifre, telefon);
-            DataStore.kullanicilar.add(yeniKullanici);
-            System.out.println("Kayıt Başarılı: " + adSoyad);
+            String sql = "INSERT INTO Kullanicilar (AdSoyad, Telefon, Sifre, Rol) VALUES (?, ?, ?, 'OGRENCI')";
 
-            // Redirect to Login Page
-            try {
-                // Using SceneManager (correct spelling)
-                SceneManager.sahneDegistir(event, "login-view.fxml");
-            } catch (IOException e) {
+            try (Connection baglanti = VeritabaniBaglantisi.baglan();
+                 PreparedStatement sorgu = baglanti.prepareStatement(sql)) {
+
+                sorgu.setString(1, adSoyad);
+                sorgu.setString(2, telefon);
+                sorgu.setString(3, sifre);
+
+                int etkilenenSatir = sorgu.executeUpdate();
+
+                if (etkilenenSatir > 0) {
+                    System.out.println("SQL Kayıt Başarılı: " + adSoyad);
+                    SceneManager.sahneDegistir(event, "login-view.fxml");
+                }
+
+            } catch (SQLException | IOException e) {
                 e.printStackTrace();
-                if(DurumEtiketi != null) DurumEtiketi.setText("Sayfa hatası: " + e.getMessage());
+                DurumEtiketi.setText("Veritabanı Hatası: " + e.getMessage());
             }
 
         } else {
-            if(DurumEtiketi != null) DurumEtiketi.setText("Hatalı bilgi veya şifreler uyuşmuyor!");
+            if(DurumEtiketi != null) DurumEtiketi.setText("Bilgiler eksik veya uyuşmuyor!");
         }
     }
 
     @FXML
     protected void GeriButonu(ActionEvent event) throws IOException {
-        // Go back to Login Page
         SceneManager.sahneDegistir(event, "login-view.fxml");
     }
 }

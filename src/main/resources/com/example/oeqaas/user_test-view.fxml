@@ -12,99 +12,117 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="898.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oeqaas.controllers.UserTestController">
-   <children>
-      <StackPane prefHeight="640.0" prefWidth="898.0">
-         <children>
-            <Pane prefHeight="482.0" prefWidth="692.0" StackPane.alignment="CENTER">
-               <children>
-                  <Label layoutX="241.0" layoutY="132.0" text="1." textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima" size="27.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="66.0" fitWidth="43.0" layoutX="55.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon1.png" />
-                     </image>
-                  </ImageView>
-                  <Circle fill="#00ff90" layoutX="851.0" layoutY="47.0" opacity="0.44" radius="33.0" stroke="#04f789" strokeType="INSIDE" />
-                  <Button layoutX="100.0" layoutY="240.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 25; -fx-background-color: #0976e2; -fx-border-color: #ffffff; -fx-border-radius: 25;" text="A)">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Arc fill="#00ff90" layoutX="59.0" layoutY="60.0" length="270.0" radiusX="44.0" radiusY="44.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" style="-fx-rotate: 315;" type="ROUND" />
-                  <Button layoutX="100.0" layoutY="308.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 25; -fx-background-color: #0976e2; -fx-border-color: #ffffff; -fx-border-radius: 25;" text="B)">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="100.0" layoutY="375.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 25; -fx-background-color: #0976e2; -fx-border-color: #ffffff; -fx-border-radius: 25;" text="C)">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="100.0" layoutY="440.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 25; -fx-background-color: #0976e2; -fx-border-color: #ffffff; -fx-border-radius: 25;" text="D)">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Label layoutX="271.0" layoutY="133.0" text="Aşağıdakilerden hangisi renktir ?" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima" size="27.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="173.0" layoutY="251.0" text="Aşağıdakilerden hangisi renktir ?" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima" size="19.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="173.0" layoutY="319.0" text="Mor" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima" size="19.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="173.0" layoutY="386.0" text="Aşağıdakilerden hangisi renktir ?" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima" size="19.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="173.0" layoutY="451.0" text="Aşağıdakilerden hangisi renktir ?" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima" size="19.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="367.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                     <image>
-                        <Image url="@ok.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="482.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
-                     <image>
-                        <Image url="@ok.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="115.0" fitWidth="157.0" layoutX="392.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon1.png" />
-                     </image>
-                  </ImageView>
-                  <Circle fill="#00ff90" layoutX="857.0" layoutY="589.0" opacity="0.44" radius="33.0" stroke="#04f789" strokeType="INSIDE" />
-                  <TextField fx:id="AdSoyadAlani" cache="true" layoutX="416.0" layoutY="529.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="66.0" promptText="soru numarası" style="-fx-background-color: #2A363F; -fx-text-fill: white; -fx-border-color: #ffffff; -fx-border-radius: 10;">
-                     <font>
-                        <Font name="System Bold" size="8.0" />
-                     </font>
-                  </TextField>
-                  <Button layoutX="425.0" layoutY="574.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="50.0" style="-fx-background-color: 44ff11;" text="Git">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="32.0" layoutY="575.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="66.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Geri" />
-               </children>
-            </Pane>
-         </children>
-      </StackPane>
-   </children>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="898.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oeqaas.controllers.UserTestController">
+    <children>
+        <StackPane prefHeight="640.0" prefWidth="898.0">
+            <children>
+                <Pane prefHeight="482.0" prefWidth="692.0" StackPane.alignment="CENTER">
+                    <children>
+                        <Label fx:id="soruNoLabel" layoutX="241.0" layoutY="132.0" text="1." textFill="WHITE">
+                            <font>
+                                <Font name="Ebrima" size="27.0" />
+                            </font>
+                        </Label>
+
+                        <ImageView fitHeight="66.0" fitWidth="43.0" layoutX="55.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icon1.png" />
+                            </image>
+                        </ImageView>
+
+                        <Circle fill="#00ff90" layoutX="851.0" layoutY="47.0" opacity="0.44" radius="33.0" stroke="#04f789" strokeType="INSIDE" />
+
+                        <Button userData="A" onAction="#cevabiKontrolEt" layoutX="100.0" layoutY="240.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 25; -fx-background-color: #0976e2; -fx-border-color: #ffffff; -fx-border-radius: 25;" text="A)">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+
+                        <Arc fill="#00ff90" layoutX="59.0" layoutY="60.0" length="270.0" radiusX="44.0" radiusY="44.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" style="-fx-rotate: 315;" type="ROUND" />
+
+                        <Button userData="B" onAction="#cevabiKontrolEt" layoutX="100.0" layoutY="308.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 25; -fx-background-color: #0976e2; -fx-border-color: #ffffff; -fx-border-radius: 25;" text="B)">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+
+                        <Button userData="C" onAction="#cevabiKontrolEt" layoutX="100.0" layoutY="375.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 25; -fx-background-color: #0976e2; -fx-border-color: #ffffff; -fx-border-radius: 25;" text="C)">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+
+                        <Button userData="D" onAction="#cevabiKontrolEt" layoutX="100.0" layoutY="440.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 25; -fx-background-color: #0976e2; -fx-border-color: #ffffff; -fx-border-radius: 25;" text="D)">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+
+                        <Label fx:id="soruMetniLabel" alignment="TOP_LEFT" layoutX="271.0" layoutY="133.0" prefHeight="100.0" prefWidth="500.0" text="Soru Yükleniyor..." textFill="WHITE" wrapText="true">
+                            <font>
+                                <Font name="Ebrima" size="20.0" />
+                            </font>
+                        </Label>
+
+                        <Label fx:id="secenekALabel" layoutX="173.0" layoutY="251.0" prefWidth="500.0" text="Seçenek A" textFill="WHITE">
+                            <font>
+                                <Font name="Ebrima" size="19.0" />
+                            </font>
+                        </Label>
+
+                        <Label fx:id="secenekBLabel" layoutX="173.0" layoutY="319.0" prefWidth="500.0" text="Seçenek B" textFill="WHITE">
+                            <font>
+                                <Font name="Ebrima" size="19.0" />
+                            </font>
+                        </Label>
+
+                        <Label fx:id="secenekCLabel" layoutX="173.0" layoutY="386.0" prefWidth="500.0" text="Seçenek C" textFill="WHITE">
+                            <font>
+                                <Font name="Ebrima" size="19.0" />
+                            </font>
+                        </Label>
+
+                        <Label fx:id="secenekDLabel" layoutX="173.0" layoutY="451.0" prefWidth="500.0" text="Seçenek D" textFill="WHITE">
+                            <font>
+                                <Font name="Ebrima" size="19.0" />
+                            </font>
+                        </Label>
+
+                        <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="367.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
+                            <image>
+                                <Image url="@ok.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="482.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
+                            <image>
+                                <Image url="@ok.png" />
+                            </image>
+                        </ImageView>
+
+                        <ImageView fitHeight="115.0" fitWidth="157.0" layoutX="392.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icon1.png" />
+                            </image>
+                        </ImageView>
+
+                        <Circle fill="#00ff90" layoutX="857.0" layoutY="589.0" opacity="0.44" radius="33.0" stroke="#04f789" strokeType="INSIDE" />
+
+                        <TextField cache="true" layoutX="416.0" layoutY="529.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="66.0" promptText="No" style="-fx-background-color: #2A363F; -fx-text-fill: white; -fx-border-color: #ffffff; -fx-border-radius: 10;">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </TextField>
+
+                        <Button layoutX="425.0" layoutY="574.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="50.0" style="-fx-background-color: #44ff11;" text="Git">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Button>
+
+                        <Button layoutX="32.0" layoutY="575.0" onAction="#geriDon" mnemonicParsing="false" prefHeight="39.0" prefWidth="66.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Geri" />
+                    </children>
+                </Pane>
+            </children>
+        </StackPane>
+    </children>
 </VBox>

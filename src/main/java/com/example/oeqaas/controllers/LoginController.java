@@ -1,14 +1,19 @@
 package com.example.oeqaas.controllers;
 
-import com.example.oeqaas.utils.SceneManager;
-import com.example.oeqaas.utils.DataStore;
 import com.example.oeqaas.models.User;
+import com.example.oeqaas.utils.DataStore;
+import com.example.oeqaas.utils.SceneManager;
+import com.example.oeqaas.utils.VeritabaniBaglantisi;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginController {
 
@@ -26,34 +31,42 @@ public class LoginController {
             return;
         }
 
-        System.out.println("Giriş Denemesi: " + girilenAd);
+        String sql = "SELECT * FROM Kullanicilar WHERE AdSoyad = ? AND Sifre = ?";
 
-        boolean kullaniciBulundu = false;
+        try (Connection baglanti = VeritabaniBaglantisi.baglan();
+             PreparedStatement sorgu = baglanti.prepareStatement(sql)) {
 
-        // Check DataStore
-        for(User u : DataStore.kullanicilar) {
-            if(u.getAdSoyad().equalsIgnoreCase(girilenAd) && u.getSifre().equals(girilenSifre)) {
-                kullaniciBulundu = true;
-                break;
-            }
-        }
+            sorgu.setString(1, girilenAd);
+            sorgu.setString(2, girilenSifre);
 
-        if (kullaniciBulundu) {
-            System.out.println("Giriş Başarılı!");
-            try {
-                if (girilenAd.equalsIgnoreCase("admin")) {
+            ResultSet sonuc = sorgu.executeQuery();
+
+            if (sonuc.next()) {
+                // Kullanıcı Bulundu, Nesne Oluştur
+                User girisYapan = new User(
+                        sonuc.getString("AdSoyad"),
+                        sonuc.getString("Email"),
+                        sonuc.getString("Sifre"),
+                        sonuc.getString("Telefon")
+                );
+                girisYapan.setId(sonuc.getInt("KullaniciID")); // ID çok önemli!
+
+                DataStore.aktifKullanici = girisYapan;
+                System.out.println("Giriş Başarılı: " + girisYapan.getAdSoyad());
+
+                String rol = sonuc.getString("Rol");
+                if ("ADMIN".equalsIgnoreCase(rol) || girilenAd.equalsIgnoreCase("Admin")) {
                     SceneManager.sahneDegistir(event, "admin_test-view.fxml");
                 } else {
-                    // FIXED: Go to Selection Screen first, not the Test directly
                     SceneManager.sahneDegistir(event, "user_test_selection-view.fxml");
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-                DurumEtiketi.setText("Sayfa açılamadı: Dosya bulunamadı!");
-                System.err.println("Hata Detayı: " + e.getMessage());
+            } else {
+                DurumEtiketi.setText("Hatalı Şifre veya Kullanıcı!");
             }
-        } else {
-            DurumEtiketi.setText("Hatalı Şifre veya Kullanıcı!");
+
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            DurumEtiketi.setText("Bağlantı Hatası: " + e.getMessage());
         }
     }
 
@@ -64,6 +77,6 @@ public class LoginController {
 
     @FXML
     protected void SifremiUnuttumButonu(ActionEvent event) {
-        DurumEtiketi.setText("Özellik yakında eklenecek.");
+        DurumEtiketi.setText("Yakında...");
     }
 }
