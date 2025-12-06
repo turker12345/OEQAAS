@@ -56,7 +56,7 @@
 
                     <ImageView fitHeight="195.0" fitWidth="253.0" layoutX="142.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image url="@icon1.png" />
+                            <Image url="@images/icon1.png" />
                         </image>
                     </ImageView>
 
