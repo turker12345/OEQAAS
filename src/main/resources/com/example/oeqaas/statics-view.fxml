@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="851.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oeqaas.controllers.TesterSelectController">
+    <children>
+        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="852.0" style="-fx-background-color: #2A363F;">
+            <children>
+                <Pane prefHeight="587.0" prefWidth="750.0" style="-fx-background-color: #2A363F;">
+                    <children>
+
+                        <Label layoutX="298.0" layoutY="594.0" prefHeight="30.0" prefWidth="302.0" text="Quiz &amp; Analysis System ©2025 Tüm hakları saklıdır." textAlignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="DejaVu Sans Mono Bold" size="10.0" />
+                            </font>
+                        </Label>
+                  <Pane layoutX="15.0" layoutY="17.0" prefHeight="81.0" prefWidth="822.0" style="-fx-background-color: #2dcc74; -fx-background-radius: 5;">
+                     <children>
+                        <Button graphicTextGap="10.0" layoutX="508.0" layoutY="21.0" mnemonicParsing="false" onAction="#testBaslat" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="İstatistiklerim">
+                           <font>
+                              <Font name="Ebrima Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="34.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/istatistik.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button graphicTextGap="10.0" layoutX="346.0" layoutY="21.0" mnemonicParsing="false" onAction="#testBaslat" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: white; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="Sıralamam">
+                           <font>
+                              <Font name="DejaVu Sans Mono Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/siralama.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="689.0" layoutY="21.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: #E53935; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Çıkış Yap" textFill="#ff3434">
+                           <graphic>
+                              <ImageView fitHeight="34.0" fitWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/exit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Arc fill="#2a363f" layoutX="50.0" layoutY="41.0" length="270.0" radiusX="34.0" radiusY="34.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" style="-fx-rotate: 315;" type="ROUND" />
+                        <ImageView fitHeight="40.0" fitWidth="33.0" layoutX="51.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icon1.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <ProgressBar fx:id="barYanlis" layoutX="212.0" layoutY="268.0" prefHeight="14.0" prefWidth="162.0" progress="1.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-rotate: 270;" stylesheets="@style.css" />
+                  <ProgressBar fx:id="barDogru" layoutX="160.0" layoutY="268.0" prefHeight="14.0" prefWidth="162.0" progress="0.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-rotate: 270;" stylesheets="@style.css" />
+                  <Line endX="100.0" layoutX="174.0" layoutY="254.0" startX="-100.0" stroke="WHITE" style="-fx-rotate: 90; -fx-fill: white;" />
+                  <Line endX="100.0" layoutX="274.0" layoutY="355.0" startX="-100.0" stroke="WHITE" style="-fx-rotate: 0; -fx-fill: white;" />
+                  <Label layoutX="134.0" layoutY="428.0" style="-fx-text-fill: white;" text="Başarı Yüzdesi %" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblYuzde" layoutX="272.0" layoutY="428.0" opacity="0.73" style="-fx-text-fill: white;" text="0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ProgressIndicator fx:id="indBasari" layoutX="319.0" layoutY="428.0" prefHeight="44.0" prefWidth="44.0" progress="0.0" />
+                  <Line endX="65.6" layoutX="276.0" layoutY="321.0" opacity="0.36" startX="-100.0" stroke="WHITE" />
+                  <Line endX="65.6" layoutX="273.0" layoutY="280.0" opacity="0.36" startX="-100.0" stroke="WHITE" />
+                  <Line endX="65.6" layoutX="274.0" layoutY="241.0" opacity="0.36" startX="-100.0" stroke="WHITE" />
+                  <Line endX="65.6" layoutX="274.0" layoutY="197.0" opacity="0.36" startX="-100.0" stroke="WHITE" />
+                  <Label layoutX="139.0" layoutY="185.0" opacity="0.73" style="-fx-text-fill: white;" text="10" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="229.0" opacity="0.73" style="-fx-text-fill: white;" text="7" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="267.0" opacity="0.73" style="-fx-text-fill: white;" text="5" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="308.0" opacity="0.73" style="-fx-text-fill: white;" text="3" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="274.0" layoutY="369.0" style="-fx-text-fill: white;" text="Yanlış" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="220.0" layoutY="367.0" style="-fx-text-fill: white;" text="Doğru" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="341.0" opacity="0.73" style="-fx-text-fill: white;" text="0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="256.0" layoutY="485.0" style="-fx-text-fill: white;" text="Yaptığınız Yanlış Sayısı :" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblYuzde1" layoutX="243.0" layoutY="480.0" style="-fx-text-fill: white;" text="0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblYuzde11" layoutX="362.0" layoutY="480.0" style="-fx-text-fill: white;" text="10" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ListView layoutX="539.0" layoutY="161.0" prefHeight="322.0" prefWidth="270.0" style="-fx-background-color: #2A363F; -fx-border-color: #2dcc74;" />
+                  <Label layoutX="639.0" layoutY="126.0" text="Testler" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="539.0" layoutY="522.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="270.0" style="-fx-background-color: #2dcc74;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="538.0" layoutY="488.0" prefHeight="30.0" prefWidth="270.0" style="-fx-border-color: white;" text="    Aramak İstediğiniz Test" textAlignment="CENTER" textFill="#a8ffbe88">
+                     <font>
+                        <Font name="Ebrima" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="132.0" layoutY="485.0" style="-fx-text-fill: white;" text="Yaptığınız Doğru Sayısı :" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+
+                    </children>
+                </Pane>
+            </children>
+        </StackPane>
+    </children>
+</VBox>

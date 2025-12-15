@@ -9,7 +9,7 @@ import java.io.IOException;
 public class OEQAASApplication extends Application {
     @Override
     public void start(Stage anaSahne) throws IOException { // "stage" changed to "anaSahne" (Main Stage)
-        FXMLLoader fxmlYukleyici = new FXMLLoader(OEQAASApplication.class.getResource("user_test_selection-view.fxml"));
+        FXMLLoader fxmlYukleyici = new FXMLLoader(OEQAASApplication.class.getResource("statics-view.fxml"));
         Scene sahne = new Scene(fxmlYukleyici.load(), 800, 600); // "scene" changed to "sahne"
         anaSahne.setTitle("Quiz ve Analiz Sistemi");
         // Icon setup
