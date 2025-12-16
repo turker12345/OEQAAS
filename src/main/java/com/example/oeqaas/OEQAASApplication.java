@@ -1,4 +1,5 @@
 package com.example.oeqaas;
+import com.example.oeqaas.utils.DatabaseManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import java.io.IOException;
 public class OEQAASApplication extends Application {
     @Override
     public void start(Stage anaSahne) throws IOException { // "stage" changed to "anaSahne" (Main Stage)
+        DatabaseManager.veritabaniGuncelle();
         FXMLLoader fxmlYukleyici = new FXMLLoader(OEQAASApplication.class.getResource("login-view.fxml"));
         Scene sahne = new Scene(fxmlYukleyici.load(), 800, 600); // "scene" changed to "sahne"
         anaSahne.setTitle("Quiz ve Analiz Sistemi");

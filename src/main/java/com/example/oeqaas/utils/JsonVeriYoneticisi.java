@@ -1,9 +1,6 @@
 package com.example.oeqaas.utils;
 
 import com.example.oeqaas.models.Test;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -13,7 +10,7 @@ public class JsonVeriYoneticisi {
 
     private static final String TEST_DOSYASI = "testler.json";
 
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    //private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 
     public static List<Test> testleriYukle() {
@@ -27,8 +24,8 @@ public class JsonVeriYoneticisi {
 
         try (Reader reader = new FileReader(TEST_DOSYASI)) {
 
-            Type listType = new TypeToken<ArrayList<Test>>(){}.getType();
-            testListesi = gson.fromJson(reader, listType);
+//Type listType = new TypeToken<ArrayList<Test>>(){}.getType();
+//testListesi = gson.fromJson(reader, listType);
 
 
             if (testListesi == null) {
@@ -47,7 +44,7 @@ public class JsonVeriYoneticisi {
 
     public static void testleriKaydet(List<Test> testListesi) {
         try (Writer writer = new FileWriter(TEST_DOSYASI)) {
-            gson.toJson(testListesi, writer);
+            //gson.toJson(testListesi, writer);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Hata: Dosya yazılırken sorun oluştu.");

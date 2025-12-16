@@ -8,7 +8,8 @@ public class DatabaseManager {
         try {
             // Configuration for Flyway
             // Make sure your database OEQAAS_DB exists in SQL Server
-            String url = "jdbc:sqlserver://localhost;databaseName=OEQAAS_DB;encrypt=true;trustServerCertificate=true;integratedSecurity=true;";
+            // Created by GitHub Copilot in SSMS - review carefully before executing
+            String url = "jdbc:sqlserver://COYA;databaseName=OEQAAS;user=yunus;password=;encrypt=true;trustServerCertificate=true;";
 
             // If using SQL Server Authentication (User/Pass), remove integratedSecurity=true above and fill below:
             String user = "";
@@ -16,7 +17,7 @@ public class DatabaseManager {
 
             Flyway flyway = Flyway.configure()
                     .dataSource(url, user, password)
-                    .locations("classpath:db/migration") // Looks for V1__...sql in resources/db/migration
+                    .locations("classpath:db") // Looks for V1__...sql in resources/db/migration
                     .load();
 
             // Run the migration
