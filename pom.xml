@@ -8,13 +8,10 @@
     <version>1.0-SNAPSHOT</version>
     <name>OEQAAS</name>
 
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.12.1</junit.version>
     </properties>
-
 
     <dependencies>
         <dependency>
@@ -22,6 +19,13 @@
             <artifactId>javafx-controls</artifactId>
             <version>21.0.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+            <version>11.19.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
