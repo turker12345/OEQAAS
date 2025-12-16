@@ -8,6 +8,7 @@ module com.example.oeqaas {
     // --- SQL BAĞLANTISI İÇİN GEREKLİ İZİNLER ---
     requires java.sql;
     requires com.microsoft.sqlserver.jdbc;
+    requires flyway.core;
     // -------------------------------------------
 
     opens com.example.oeqaas to javafx.fxml;
