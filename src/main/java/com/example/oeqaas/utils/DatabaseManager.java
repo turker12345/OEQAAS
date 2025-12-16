@@ -6,27 +6,32 @@ public class DatabaseManager {
 
     public static void veritabaniGuncelle() {
         try {
-            // Configuration for Flyway
-            // Make sure your database OEQAAS_DB exists in SQL Server
-            // Created by GitHub Copilot in SSMS - review carefully before executing
-            String url = "jdbc:sqlserver://COYA;databaseName=OEQAAS;user=yunus;password=;encrypt=true;trustServerCertificate=true;";
+            System.out.println("Veritabanı bağlantısı başlatılıyor (Windows Auth)...");
 
-            // If using SQL Server Authentication (User/Pass), remove integratedSecurity=true above and fill below:
-            String user = "";
-            String password = "";
+            // Option 2: Try Windows Authentication (Integrated Security)
+            // This connects using the Windows user 'yunus' automatically without a password in the string.
+            // Ensure 'COYA' is the correct server name. If it fails, try 'localhost' or 'localhost\\SQLEXPRESS'
+            String url = "jdbc:sqlserver://COYA;databaseName=OEQAAS;encrypt=true;trustServerCertificate=true;integratedSecurity=true;";
 
+            // Configure Flyway without explicit user/pass
             Flyway flyway = Flyway.configure()
-                    .dataSource(url, user, password)
-                    .locations("classpath:db") // Looks for V1__...sql in resources/db/migration
+                    .dataSource(url, null, null)
+                    .locations("classpath:db")
+                    .baselineOnMigrate(true)
                     .load();
 
-            // Run the migration
+            // Run Migration
             flyway.migrate();
-            System.out.println("✅ Veritabanı (Flyway) başarıyla güncellendi.");
+            System.out.println("✅ Veritabanı başarıyla senkronize edildi (Flyway/Windows Auth).");
 
         } catch (Exception e) {
-            System.err.println("❌ Veritabanı güncelleme hatası: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("❌ KRİTİK HATA: Veritabanına bağlanılamadı!");
+            System.err.println("Hata Detayı: " + e.getMessage());
+
+            // Debugging hint
+            if (e.getMessage().contains("integratedSecurity")) {
+                System.err.println("İPUCU: 'mssql-jdbc_auth.dll' dosyası eksik olabilir. Lütfen SQL Server Authentication moduna geçin veya DLL'i ekleyin.");
+            }
         }
     }
 }

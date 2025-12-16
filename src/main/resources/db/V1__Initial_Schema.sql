@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS Sonuclar;
 DROP TABLE IF EXISTS Kullanicilar;
 
