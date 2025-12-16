@@ -5,10 +5,9 @@ module com.example.oeqaas {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
 
-    // --- ADDED THESE LINES FOR FLYWAY & SQL ---
-    requires java.sql;             // Required for JDBC/SQL;    // Required for Flyway
+    requires java.sql;
     requires com.microsoft.sqlserver.jdbc;
-    requires flyway.core; // Required if accessing SQL Server classes directly
+    requires flyway.core;
 
     opens com.example.oeqaas to javafx.fxml;
     exports com.example.oeqaas;
@@ -18,4 +17,5 @@ module com.example.oeqaas {
     opens com.example.oeqaas.models to javafx.fxml;
     exports com.example.oeqaas.utils;
     opens com.example.oeqaas.utils to javafx.fxml;
+    opens db;
 }

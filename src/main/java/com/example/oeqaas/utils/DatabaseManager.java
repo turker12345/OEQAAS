@@ -6,32 +6,27 @@ public class DatabaseManager {
 
     public static void veritabaniGuncelle() {
         try {
-            System.out.println("Veritabanı bağlantısı başlatılıyor (Windows Auth)...");
+            // BURAYI DÜZELTİYORUZ:
+            // databaseName kısmının SSMS'teki isminle AYNI olduğundan emin ol (OEQAAS veya OEQAAS_DB)
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=OEQAAS;encrypt=true;trustServerCertificate=true;";
 
-            // Option 2: Try Windows Authentication (Integrated Security)
-            // This connects using the Windows user 'yunus' automatically without a password in the string.
-            // Ensure 'COYA' is the correct server name. If it fails, try 'localhost' or 'localhost\\SQLEXPRESS'
-            String url = "jdbc:sqlserver://COYA;databaseName=OEQAAS;encrypt=true;trustServerCertificate=true;integratedSecurity=true;";
+            // BURASI ÇOK ÖNEMLİ:
+            // Buraya "Admin" YAZMA. Burası SQL Server'ın ana yetkilisidir.
+            // Genelde "sa" olur. Şifresi de SQL Server kurarken belirlediğin şifredir (örn: 12345).
+            String user = "sa";
+            String password = "12345"; // Buraya SQL Server 'sa' şifreni yaz.
 
-            // Configure Flyway without explicit user/pass
             Flyway flyway = Flyway.configure()
-                    .dataSource(url, null, null)
+                    .dataSource(url, user, password)
                     .locations("classpath:db")
-                    .baselineOnMigrate(true)
                     .load();
 
-            // Run Migration
             flyway.migrate();
-            System.out.println("✅ Veritabanı başarıyla senkronize edildi (Flyway/Windows Auth).");
+            System.out.println("✅ Veritabanı (Flyway) başarıyla güncellendi.");
 
         } catch (Exception e) {
-            System.err.println("❌ KRİTİK HATA: Veritabanına bağlanılamadı!");
-            System.err.println("Hata Detayı: " + e.getMessage());
-
-            // Debugging hint
-            if (e.getMessage().contains("integratedSecurity")) {
-                System.err.println("İPUCU: 'mssql-jdbc_auth.dll' dosyası eksik olabilir. Lütfen SQL Server Authentication moduna geçin veya DLL'i ekleyin.");
-            }
+            System.err.println("❌ Veritabanı güncelleme hatası: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

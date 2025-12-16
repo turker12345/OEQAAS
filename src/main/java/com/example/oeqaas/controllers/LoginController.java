@@ -67,6 +67,7 @@ public class LoginController {
         } catch (SQLException | IOException e) {
             e.printStackTrace();
             DurumEtiketi.setText("Bağlantı Hatası: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
