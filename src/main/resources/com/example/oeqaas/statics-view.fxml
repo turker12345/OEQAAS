@@ -52,7 +52,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="689.0" layoutY="21.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: #E53935; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Çıkış Yap" textFill="#ff3434">
+                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="689.0" layoutY="21.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: #E53935; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Geri" textFill="#ff3434">
                            <graphic>
                               <ImageView fitHeight="34.0" fitWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                  <image>
