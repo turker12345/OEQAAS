@@ -42,7 +42,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button graphicTextGap="10.0" layoutX="346.0" layoutY="21.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: white; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="Sıralamam">
+                                <Button graphicTextGap="10.0" layoutX="346.0" layoutY="21.0" mnemonicParsing="false" onAction="#siralamayaGit" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: white; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="Sıralamam">
                                     <font>
                                         <Font name="DejaVu Sans Mono Bold" size="14.0" />
                                     </font>
@@ -101,7 +101,7 @@
                                 <Font name="System Bold" size="16.0" />
                             </font>
                         </Label>
-                        <ListView fx:id="gecmisListesi" layoutX="539.0" layoutY="161.0" prefHeight="322.0" prefWidth="270.0" style="-fx-background-color: #2A363F; -fx-border-color: #2dcc74;" />
+                        <ListView fx:id="gecmisListesi" layoutX="539.0" layoutY="161.0" prefHeight="233.0" prefWidth="270.0" style="-fx-background-color: #2A363F; -fx-border-color: #2dcc74;" />
                         <Label layoutX="639.0" layoutY="126.0" text="Testler" textFill="WHITE">
                             <font>
                                 <Font size="18.0" />
@@ -126,14 +126,14 @@
                                 <Font size="10.0" />
                             </font>
                         </Label>
-                  <BarChart id="barChart" layoutX="15.0" layoutY="108.0" prefHeight="322.0" prefWidth="513.0">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </BarChart>
+                        <BarChart fx:id="barChart" layoutX="28.0" layoutY="109.0" prefHeight="314.0" prefWidth="494.0" style="-fx-background-color: #2A363F;" stylesheets="@adminstyle.css">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis side="LEFT" />
+                            </yAxis>
+                        </BarChart>
                     </children>
                 </Pane>
             </children>
