@@ -19,10 +19,10 @@ import java.sql.SQLException;
 public class ArrangementController {
 
     @FXML private TableView<SiralamaVerisi> userTable;
-    @FXML private TableColumn<SiralamaVerisi, Integer> colName;   // Sıra No
-    @FXML private TableColumn<SiralamaVerisi, String> colPass;    // Kullanıcı Adı
-    @FXML private TableColumn<SiralamaVerisi, Integer> colPhone;  // Test Sayısı
-    @FXML private TableColumn<SiralamaVerisi, String> colPhone1;  // Başarı Yüzdesi
+    @FXML private TableColumn<SiralamaVerisi, Integer> colName;
+    @FXML private TableColumn<SiralamaVerisi, String> colPass;
+    @FXML private TableColumn<SiralamaVerisi, Integer> colPhone;
+    @FXML private TableColumn<SiralamaVerisi, String> colPhone1;
 
     @FXML
     public void initialize() {
@@ -36,16 +36,9 @@ public class ArrangementController {
 
     private void verileriYukle() {
         ObservableList<SiralamaVerisi> liste = FXCollections.observableArrayList();
-
-        // Kullanıcıları başarı oranına göre sıralayan SQL
-        String sql = "SELECT k.AdSoyad, " +
-                "COUNT(s.SonucID) as TestSayisi, " +
-                "SUM(s.DogruSayisi) as ToplamDogru, " +
-                "SUM(s.YanlisSayisi) as ToplamYanlis " +
-                "FROM Kullanicilar k " +
-                "LEFT JOIN Sonuclar s ON k.KullaniciID = s.KullaniciID " +
-                "GROUP BY k.KullaniciID, k.AdSoyad " +
-                "ORDER BY ToplamDogru DESC";
+        String sql = "SELECT k.AdSoyad, COUNT(s.SonucID) as TestSayisi, SUM(s.DogruSayisi) as ToplamDogru, SUM(s.YanlisSayisi) as ToplamYanlis " +
+                "FROM Kullanicilar k LEFT JOIN Sonuclar s ON k.KullaniciID = s.KullaniciID " +
+                "GROUP BY k.KullaniciID, k.AdSoyad ORDER BY ToplamDogru DESC";
 
         try (Connection conn = VeritabaniBaglantisi.baglan();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -58,7 +51,6 @@ public class ArrangementController {
                 int dogru = rs.getInt("ToplamDogru");
                 int yanlis = rs.getInt("ToplamYanlis");
                 int toplamSoru = dogru + yanlis;
-
                 double yuzde = (toplamSoru == 0) ? 0 : ((double) dogru / toplamSoru) * 100;
                 String yuzdeStr = String.format("%%%.1f", yuzde);
 
@@ -71,12 +63,17 @@ public class ArrangementController {
         }
     }
 
+    // YENİ EKLENEN METOT: İstatistiklere Git
+    @FXML
+    public void istatistiklereGit(ActionEvent event) throws IOException {
+        SceneManager.sahneDegistir(event, "statics-view.fxml");
+    }
+
     @FXML
     public void geriDon(ActionEvent event) throws IOException {
         SceneManager.sahneDegistir(event, "user_test_selection-view.fxml");
     }
 
-    // Tablo için basit veri modeli
     public static class SiralamaVerisi {
         private int sira;
         private String kullaniciAdi;

@@ -28,10 +28,14 @@ public class AdminController {
     @FXML private TableColumn<User, String> colName;
     @FXML private TableColumn<User, String> colPass;
     @FXML private TableColumn<User, String> colPhone;
+    @FXML private TableColumn<User, String> colRole; // YENİ: Rol Sütunu
+
     @FXML private TextField txtName, txtPass, txtPhone;
+    @FXML private ComboBox<String> comboRole; // YENİ: Rol Seçimi için ComboBox
     @FXML private Label lblUserMsg;
 
-    // --- TAB 2: TEST YÖNETİMİ (JSON) ---
+    // --- TAB 2 ve 3 (Test ve Sonuçlar) ---
+    // (Önceki kodlarınızın aynısı kalabilir, buraya sadece değişenleri ekliyorum)
     @FXML private ListView<Test> quizList;
     @FXML private TextField txtQuizName;
     @FXML private Label lblSelectedQuiz;
@@ -39,12 +43,8 @@ public class AdminController {
     @FXML private ComboBox<String> comboCorrect;
     @FXML private Button btnAddQuestion;
     @FXML private Label lblQuizMsg;
-
-    // --- TAB 3: SONUÇ İZLEME (SQL & Grafik) ---
     @FXML private ListView<User> resultUserList;
     @FXML private ListView<String> resultHistoryList;
-
-    // Grafikler (YENİ EKLENDİ)
     @FXML private ProgressBar barDogru;
     @FXML private ProgressBar barYanlis;
     @FXML private ProgressIndicator indBasari;
@@ -55,22 +55,25 @@ public class AdminController {
 
     @FXML
     public void initialize() {
-        // 1. Kullanıcıları SQL'den Yükle
-        kullanicilariGetir();
-
+        // Tablo Sütunlarını Bağla
         colName.setCellValueFactory(new PropertyValueFactory<>("adSoyad"));
         colPass.setCellValueFactory(new PropertyValueFactory<>("sifre"));
         colPhone.setCellValueFactory(new PropertyValueFactory<>("telefon"));
+        colRole.setCellValueFactory(new PropertyValueFactory<>("rol")); // YENİ
 
-        // 2. Testleri JSON'dan Yükle
+        // Kullanıcı Rol Seçenekleri
+        if (comboRole != null) {
+            comboRole.getItems().addAll("OGRENCI", "ADMIN");
+            comboRole.getSelectionModel().selectFirst();
+        }
+
+        kullanicilariGetir();
+
+        // Diğer initialize işlemleri...
         quizObservableList = FXCollections.observableArrayList(DataStore.testler);
-        quizList.setItems(quizObservableList);
-
-        // 3. ComboBox Ayarı
-        comboCorrect.getItems().addAll("A", "B", "C", "D");
+        if (quizList != null) quizList.setItems(quizObservableList);
+        if (comboCorrect != null) comboCorrect.getItems().addAll("A", "B", "C", "D");
     }
-
-
 
     private void kullanicilariGetir() {
         List<User> dbUserList = new ArrayList<>();
@@ -88,6 +91,7 @@ public class AdminController {
                         rs.getString("Telefon")
                 );
                 u.setId(rs.getInt("KullaniciID"));
+                u.setRol(rs.getString("Rol")); // YENİ: Rolü veritabanından al
                 dbUserList.add(u);
             }
         } catch (SQLException e) {
@@ -96,13 +100,14 @@ public class AdminController {
 
         userObservableList = FXCollections.observableArrayList(dbUserList);
         userTable.setItems(userObservableList);
-        resultUserList.setItems(userObservableList);
+        if (resultUserList != null) resultUserList.setItems(userObservableList);
     }
 
     @FXML
     void addUser() {
         if (!txtName.getText().isEmpty() && !txtPass.getText().isEmpty()) {
-            String sql = "INSERT INTO Kullanicilar (AdSoyad, Sifre, Telefon, Rol) VALUES (?, ?, ?, 'OGRENCI')";
+            // YENİ: Rolü de ekle
+            String sql = "INSERT INTO Kullanicilar (AdSoyad, Sifre, Telefon, Rol) VALUES (?, ?, ?, ?)";
 
             try (Connection conn = VeritabaniBaglantisi.baglan();
                  PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -110,9 +115,14 @@ public class AdminController {
                 stmt.setString(1, txtName.getText());
                 stmt.setString(2, txtPass.getText());
                 stmt.setString(3, txtPhone.getText());
+
+                // Seçilen rolü al, yoksa varsayılan OGRENCI yap
+                String secilenRol = (comboRole != null && comboRole.getValue() != null) ? comboRole.getValue() : "OGRENCI";
+                stmt.setString(4, secilenRol);
+
                 stmt.executeUpdate();
 
-                lblUserMsg.setText("Kullanıcı veritabanına eklendi.");
+                lblUserMsg.setText("Kullanıcı eklendi.");
                 kullanicilariGetir();
                 clearUserInputs();
 
@@ -128,7 +138,8 @@ public class AdminController {
     void updateUser() {
         User selected = userTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            String sql = "UPDATE Kullanicilar SET AdSoyad=?, Sifre=?, Telefon=? WHERE KullaniciID=?";
+            // YENİ: Rol güncelleme eklendi
+            String sql = "UPDATE Kullanicilar SET AdSoyad=?, Sifre=?, Telefon=?, Rol=? WHERE KullaniciID=?";
 
             try (Connection conn = VeritabaniBaglantisi.baglan();
                  PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -136,7 +147,11 @@ public class AdminController {
                 stmt.setString(1, txtName.getText());
                 stmt.setString(2, txtPass.getText());
                 stmt.setString(3, txtPhone.getText());
-                stmt.setInt(4, selected.getId());
+
+                String secilenRol = (comboRole != null && comboRole.getValue() != null) ? comboRole.getValue() : "OGRENCI";
+                stmt.setString(4, secilenRol);
+
+                stmt.setInt(5, selected.getId());
                 stmt.executeUpdate();
 
                 lblUserMsg.setText("Kullanıcı güncellendi.");
@@ -149,28 +164,7 @@ public class AdminController {
         }
     }
 
-    @FXML
-    void deleteUser() {
-        User selected = userTable.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            String sql = "DELETE FROM Kullanicilar WHERE KullaniciID=?";
-
-            try (Connection conn = VeritabaniBaglantisi.baglan();
-                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-                stmt.setInt(1, selected.getId());
-                stmt.executeUpdate();
-
-                lblUserMsg.setText("Kullanıcı silindi.");
-                kullanicilariGetir();
-                clearUserInputs();
-
-            } catch (SQLException e) {
-                lblUserMsg.setText("Hata: " + e.getMessage());
-            }
-        }
-    }
-
+    // Diğer metodlar (deleteUser, userSelected vb.) aynı kalacak...
     @FXML
     void userSelected() {
         User selected = userTable.getSelectionModel().getSelectedItem();
@@ -178,148 +172,36 @@ public class AdminController {
             txtName.setText(selected.getAdSoyad());
             txtPass.setText(selected.getSifre());
             txtPhone.setText(selected.getTelefon());
+            if(comboRole != null) comboRole.setValue(selected.getRol());
+        }
+    }
+
+    @FXML
+    void deleteUser() {
+        User selected = userTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            String sql = "DELETE FROM Kullanicilar WHERE KullaniciID=?";
+            try (Connection conn = VeritabaniBaglantisi.baglan();
+                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, selected.getId());
+                stmt.executeUpdate();
+                lblUserMsg.setText("Kullanıcı silindi.");
+                kullanicilariGetir();
+                clearUserInputs();
+            } catch (SQLException e) {
+                lblUserMsg.setText("Hata: " + e.getMessage());
+            }
         }
     }
 
     private void clearUserInputs() {
         txtName.clear(); txtPass.clear(); txtPhone.clear();
+        if(comboRole != null) comboRole.getSelectionModel().selectFirst();
     }
 
-    // ================= TEST İŞLEMLERİ (JSON) =================
+    // ... Test ve Sonuç metodları (addQuiz, resultUserSelected vb.) buraya gelecek ...
+    // Önceki kodlarınızdaki gibi kalabilirler.
 
-    @FXML
-    void addQuiz() {
-        if (!txtQuizName.getText().isEmpty()) {
-            Test newTest = new Test(txtQuizName.getText());
-            DataStore.testler.add(newTest);
-            DataStore.verileriKaydet();
-
-            quizObservableList.setAll(DataStore.testler);
-            txtQuizName.clear();
-            lblQuizMsg.setText("Test oluşturuldu.");
-        }
-    }
-
-    @FXML
-    void deleteQuiz() {
-        Test selected = quizList.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            DataStore.testler.remove(selected);
-            DataStore.verileriKaydet();
-
-            quizObservableList.setAll(DataStore.testler);
-            lblSelectedQuiz.setText("Seçili Test: Yok");
-            btnAddQuestion.setDisable(true);
-            lblQuizMsg.setText("Test silindi.");
-        }
-    }
-
-    @FXML
-    void quizSelected() {
-        Test selected = quizList.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            lblSelectedQuiz.setText("Seçili: " + selected.getAd());
-            btnAddQuestion.setDisable(false);
-        }
-    }
-
-    @FXML
-    void addQuestionToQuiz() {
-        Test selected = quizList.getSelectionModel().getSelectedItem();
-        boolean inputsValid = selected != null && comboCorrect.getValue() != null && !txtQuestion.getText().isEmpty();
-
-        if (inputsValid) {
-            Question q = new Question(
-                    txtQuestion.getText(), txtOptA.getText(), txtOptB.getText(),
-                    txtOptC.getText(), txtOptD.getText(), comboCorrect.getValue()
-            );
-            selected.soruEkle(q);
-            DataStore.verileriKaydet();
-
-            lblQuizMsg.setText("Soru eklendi! (Toplam: " + selected.getSorular().size() + ")");
-            txtQuestion.clear(); txtOptA.clear(); txtOptB.clear(); txtOptC.clear(); txtOptD.clear();
-        }
-    }
-
-    @FXML
-    void resultUserSelected() {
-        User selected = resultUserList.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            // 1. Liste Görünümünü Doldur
-            List<String> sonuclar = new ArrayList<>();
-            String sqlListe = "SELECT * FROM Sonuclar WHERE KullaniciID = ? ORDER BY Tarih DESC";
-
-
-            String sqlGrafik = "SELECT AVG(CAST(DogruSayisi AS FLOAT)) as OrtDogru, " +
-                    "AVG(CAST(YanlisSayisi AS FLOAT)) as OrtYanlis, " +
-                    "SUM(DogruSayisi) as ToplamDogru, " +
-                    "SUM(YanlisSayisi) as ToplamYanlis " +
-                    "FROM Sonuclar WHERE KullaniciID = ?";
-
-            try (Connection conn = VeritabaniBaglantisi.baglan()) {
-
-                // --- Liste İşlemleri ---
-                try (PreparedStatement stmt = conn.prepareStatement(sqlListe)) {
-                    stmt.setInt(1, selected.getId());
-                    ResultSet rs = stmt.executeQuery();
-                    while(rs.next()) {
-                        String testAdi = rs.getString("TestAdi");
-                        int dogru = rs.getInt("DogruSayisi");
-                        int yanlis = rs.getInt("YanlisSayisi");
-                        String tarih = rs.getString("Tarih");
-                        sonuclar.add(testAdi + " | D:" + dogru + " Y:" + yanlis + " (" + tarih + ")");
-                    }
-                }
-
-                // --- Grafik İşlemleri ---
-                try (PreparedStatement stmt = conn.prepareStatement(sqlGrafik)) {
-                    stmt.setInt(1, selected.getId());
-                    ResultSet rs = stmt.executeQuery();
-                    if (rs.next()) {
-                        double ortDogru = rs.getDouble("OrtDogru");
-                        double ortYanlis = rs.getDouble("OrtYanlis");
-                        int topDogru = rs.getInt("ToplamDogru");
-                        int topYanlis = rs.getInt("ToplamYanlis");
-
-                        // Grafikleri 10 üzerinden normalize et (Çünkü arayüzdeki çizgiler 10'a kadar)
-                        // Eğer ortalama 7 doğru ise bar %70 dolar.
-                        barDogru.setProgress(ortDogru / 10.0);
-                        barYanlis.setProgress(ortYanlis / 10.0);
-
-                        // Başarı Yüzdesi Hesapla
-                        double toplamSoru = topDogru + topYanlis;
-                        double basariYuzdesi = 0;
-                        if (toplamSoru > 0) {
-                            basariYuzdesi = (double) topDogru / toplamSoru;
-                        }
-
-                        indBasari.setProgress(basariYuzdesi);
-                        lblYuzde.setText(String.format("%.0f", basariYuzdesi * 100)); // %85 gibi yaz
-                    }
-                }
-
-                if (sonuclar.isEmpty()) {
-                    sonuclar.add("Henüz çözülmüş test yok.");
-                    sifirlaGrafik();
-                }
-
-            } catch (SQLException e) {
-                sonuclar.add("Hata: " + e.getMessage());
-            }
-
-            resultHistoryList.setItems(FXCollections.observableArrayList(sonuclar));
-        }
-    }
-
-    private void sifirlaGrafik() {
-        barDogru.setProgress(0);
-        barYanlis.setProgress(0);
-        indBasari.setProgress(0);
-        lblYuzde.setText("0");
-    }
-
-    @FXML
-    void cikisYap(ActionEvent event) throws IOException {
-        SceneManager.sahneDegistir(event, "login-view.fxml");
-    }
+    // --- ÖNEMLİ: BarChart kodları StatisticsController'da olmalı ---
+    // AdminController'da BarChart kullanmıyorsanız bu kısım boş kalabilir.
 }

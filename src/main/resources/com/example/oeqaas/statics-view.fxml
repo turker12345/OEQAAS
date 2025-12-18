@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -12,7 +15,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Arc?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="851.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oeqaas.controllers.StatisticsController">
@@ -72,10 +74,7 @@
                                 </ImageView>
                             </children>
                         </Pane>
-                        <ProgressBar fx:id="barYanlis" layoutX="212.0" layoutY="268.0" prefHeight="14.0" prefWidth="162.0" progress="1.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-rotate: 270;" stylesheets="@style.css" />
                         <ProgressBar fx:id="barDogru" layoutX="160.0" layoutY="268.0" prefHeight="14.0" prefWidth="162.0" progress="0.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-rotate: 270;" stylesheets="@style.css" />
-                        <Line endX="100.0" layoutX="174.0" layoutY="254.0" startX="-100.0" stroke="WHITE" style="-fx-rotate: 90; -fx-fill: white;" />
-                        <Line endX="100.0" layoutX="274.0" layoutY="355.0" startX="-100.0" stroke="WHITE" style="-fx-rotate: 0; -fx-fill: white;" />
                         <Label layoutX="134.0" layoutY="428.0" style="-fx-text-fill: white;" text="Başarı Yüzdesi %" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="16.0" />
@@ -87,45 +86,6 @@
                             </font>
                         </Label>
                         <ProgressIndicator fx:id="indBasari" layoutX="319.0" layoutY="428.0" prefHeight="44.0" prefWidth="44.0" progress="0.0" />
-                        <Line endX="65.6" layoutX="276.0" layoutY="321.0" opacity="0.36" startX="-100.0" stroke="WHITE" />
-                        <Line endX="65.6" layoutX="273.0" layoutY="280.0" opacity="0.36" startX="-100.0" stroke="WHITE" />
-                        <Line endX="65.6" layoutX="274.0" layoutY="241.0" opacity="0.36" startX="-100.0" stroke="WHITE" />
-                        <Line endX="65.6" layoutX="274.0" layoutY="197.0" opacity="0.36" startX="-100.0" stroke="WHITE" />
-                        <Label layoutX="139.0" layoutY="185.0" opacity="0.73" style="-fx-text-fill: white;" text="10" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="16.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="149.0" layoutY="229.0" opacity="0.73" style="-fx-text-fill: white;" text="7" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="16.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="149.0" layoutY="267.0" opacity="0.73" style="-fx-text-fill: white;" text="5" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="16.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="149.0" layoutY="308.0" opacity="0.73" style="-fx-text-fill: white;" text="3" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="16.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="274.0" layoutY="369.0" style="-fx-text-fill: white;" text="Yanlış" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="220.0" layoutY="367.0" style="-fx-text-fill: white;" text="Doğru" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="149.0" layoutY="341.0" opacity="0.73" style="-fx-text-fill: white;" text="0" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="16.0" />
-                            </font>
-                        </Label>
                         <Label layoutX="256.0" layoutY="485.0" style="-fx-text-fill: white;" text="Yaptığınız Yanlış Sayısı :" textFill="WHITE">
                             <font>
                                 <Font size="10.0" />
@@ -166,6 +126,14 @@
                                 <Font size="10.0" />
                             </font>
                         </Label>
+                  <BarChart id="barChart" layoutX="15.0" layoutY="108.0" prefHeight="322.0" prefWidth="513.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
                     </children>
                 </Pane>
             </children>

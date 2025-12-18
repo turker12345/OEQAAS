@@ -6,10 +6,12 @@ import com.example.oeqaas.utils.VeritabaniBaglantisi;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.chart.BarChart; // YENİ IMPORT
+import javafx.scene.chart.XYChart;  // YENİ IMPORT
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -24,26 +26,25 @@ public class StatisticsController {
 
     @FXML private ProgressBar barDogru;
     @FXML private ProgressBar barYanlis;
-    @FXML private Label lblYuzde;      // Başarı Yüzdesi
-    @FXML private Label lblYuzde1;     // Yanlış Sayısı
-    @FXML private Label lblYuzde11;    // Doğru Sayısı
+    @FXML private Label lblYuzde, lblYuzde1, lblYuzde11;
     @FXML private ProgressIndicator indBasari;
-
     @FXML private ListView<String> gecmisListesi;
     @FXML private TextField aramaKutusu;
+
+    // YENİ: BarChart Tanımlaması (FXML'de fx:id="barChart" verdiğinizi varsayıyorum)
+    @FXML private BarChart<String, Number> barChart;
 
     private List<String> tumSonuclar = new ArrayList<>();
 
     @FXML
     public void initialize() {
         if (DataStore.aktifKullanici != null) {
-            verileriGetir(); // Artık bu metod aşağıda tanımlı
             listeyiDoldur();
+            grafikleriDoldur(); // BarChart ve diğerlerini doldur
         }
     }
 
-    // EKSİK OLAN METOD BU:
-    private void verileriGetir() {
+    private void grafikleriDoldur() {
         String sql = "SELECT SUM(DogruSayisi) as ToplamDogru, SUM(YanlisSayisi) as ToplamYanlis FROM Sonuclar WHERE KullaniciID = ?";
 
         try (Connection conn = VeritabaniBaglantisi.baglan();
@@ -57,20 +58,23 @@ public class StatisticsController {
                 int yanlis = rs.getInt("ToplamYanlis");
                 int toplam = dogru + yanlis;
 
-                // Label'ları güncelle (Null kontrolü yapıldı)
-                if (lblYuzde11 != null) lblYuzde11.setText(String.valueOf(dogru));
-                if (lblYuzde1 != null) lblYuzde1.setText(String.valueOf(yanlis));
+                // 1. ProgressBar ve Indicator Ayarları (Mevcut kodlar)
+                double yuzde = (toplam == 0) ? 0 : (double) dogru / toplam;
+                if (indBasari != null) indBasari.setProgress(yuzde);
+                if (lblYuzde != null) lblYuzde.setText(String.format("%%%.0f", yuzde * 100));
 
-                // Oranları hesapla
-                double basariOrani = (toplam == 0) ? 0 : (double) dogru / toplam;
+                // 2. YENİ: BarChart Doldurma
+                if (barChart != null) {
+                    barChart.getData().clear(); // Önce temizle
 
-                // Barların doluluk oranı
-                if (barDogru != null) barDogru.setProgress(basariOrani);
-                // Yanlış barı için opsiyonel: (double) yanlis / toplam
-                if (barYanlis != null) barYanlis.setProgress((toplam == 0) ? 0 : (double) yanlis / toplam);
+                    XYChart.Series<String, Number> series = new XYChart.Series<>();
+                    series.setName("Toplam Performans");
 
-                if (indBasari != null) indBasari.setProgress(basariOrani);
-                if (lblYuzde != null) lblYuzde.setText("%" + (int)(basariOrani * 100));
+                    series.getData().add(new XYChart.Data<>("Doğru", dogru));
+                    series.getData().add(new XYChart.Data<>("Yanlış", yanlis));
+
+                    barChart.getData().add(series);
+                }
             }
 
         } catch (SQLException e) {
@@ -95,9 +99,7 @@ public class StatisticsController {
                         " (" + rs.getDate("Tarih") + ")";
                 tumSonuclar.add(satir);
             }
-            if (gecmisListesi != null) {
-                gecmisListesi.setItems(FXCollections.observableArrayList(tumSonuclar));
-            }
+            gecmisListesi.setItems(FXCollections.observableArrayList(tumSonuclar));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,17 +108,19 @@ public class StatisticsController {
 
     @FXML
     public void ara(ActionEvent event) {
-        if (aramaKutusu == null || gecmisListesi == null) return;
-
         String aranan = aramaKutusu.getText().toLowerCase();
         List<String> filtrelenmis = new ArrayList<>();
-
         for (String sonuc : tumSonuclar) {
             if (sonuc.toLowerCase().contains(aranan)) {
                 filtrelenmis.add(sonuc);
             }
         }
         gecmisListesi.setItems(FXCollections.observableArrayList(filtrelenmis));
+    }
+
+    @FXML
+    public void siralamayaGit(ActionEvent event) throws IOException {
+        SceneManager.sahneDegistir(event, "arrangement-view.fxml");
     }
 
     @FXML

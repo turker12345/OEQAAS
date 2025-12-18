@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private int id; // SQL ID'si
+    private int id;
     private String adSoyad;
     private String email;
     private String sifre;
     private String telefon;
+    private String rol; // YENİ: Rol alanı eklendi
 
     private List<String> quizGeçmişi = new ArrayList<>();
 
@@ -17,8 +18,10 @@ public class User {
         this.email = email;
         this.sifre = sifre;
         this.telefon = telefon;
+        this.rol = "OGRENCI"; // Varsayılan rol
     }
 
+    // Getter ve Setterlar
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -33,6 +36,10 @@ public class User {
 
     public String getTelefon() { return telefon; }
     public void setTelefon(String telefon) { this.telefon = telefon; }
+
+    // YENİ: Rol Getter ve Setter
+    public String getRol() { return rol; }
+    public void setRol(String rol) { this.rol = rol; }
 
     public void skorEkle(String sonuc) { quizGeçmişi.add(sonuc); }
     public List<String> getQuizGeçmişi() { return quizGeçmişi; }

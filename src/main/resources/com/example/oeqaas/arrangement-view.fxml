@@ -25,7 +25,7 @@
                         </Label>
                         <Pane layoutX="15.0" layoutY="17.0" prefHeight="81.0" prefWidth="822.0" style="-fx-background-color: #2dcc74; -fx-background-radius: 5;">
                             <children>
-                                <Button graphicTextGap="10.0" layoutX="508.0" layoutY="21.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="İstatistiklerim">
+                                <Button graphicTextGap="10.0" layoutX="508.0" layoutY="21.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="İstatistiklerim" onAction="#istatistiklereGit">
                                     <font>
                                         <Font name="Ebrima Bold" size="14.0" />
                                     </font>
