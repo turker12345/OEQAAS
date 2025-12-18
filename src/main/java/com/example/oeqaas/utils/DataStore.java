@@ -15,7 +15,7 @@ public class DataStore {
         // Testleri JSON dosyasından yükle
         testler = JsonVeriYoneticisi.testleriYukle();
     }
-
+    public static Test secilenTest = null;
     public static void verileriKaydet() {
         JsonVeriYoneticisi.testleriKaydet(testler);
     }

@@ -15,12 +15,10 @@ public class DatabaseManager {
             // Genelde "sa" olur. Şifresi de SQL Server kurarken belirlediğin şifredir (örn: 12345).
             String user = "sa";
             String password = "12345"; // Buraya SQL Server 'sa' şifreni yaz.
-
             Flyway flyway = Flyway.configure()
                     .dataSource(url, user, password)
                     .locations("classpath:db")
                     .load();
-
             flyway.migrate();
             System.out.println("✅ Veritabanı (Flyway) başarıyla güncellendi.");
 

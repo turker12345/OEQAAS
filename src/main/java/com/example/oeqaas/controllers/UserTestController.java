@@ -30,13 +30,12 @@ public class UserTestController {
     private int dogruSayisi = 0;
     private int yanlisSayisi = 0;
     private String aktifTestAdi = "Genel Test";
-
     @FXML
     public void initialize() {
-        if (!DataStore.testler.isEmpty()) {
-            Test activeTest = DataStore.testler.get(0);
-            aktifTestAdi = activeTest.getAd();
-            currentQuestions = activeTest.getSorular();
+        // DataStore'dan seçilen testi al
+        if (DataStore.secilenTest != null) {
+            aktifTestAdi = DataStore.secilenTest.getAd();
+            currentQuestions = DataStore.secilenTest.getSorular();
 
             if (currentQuestions != null && !currentQuestions.isEmpty()) {
                 soruYukle();
@@ -44,7 +43,7 @@ public class UserTestController {
                 soruMetniLabel.setText("Bu testte hiç soru yok!");
             }
         } else {
-            soruMetniLabel.setText("Sistemde yüklü test bulunamadı.");
+            soruMetniLabel.setText("Test seçimi hatası!");
         }
     }
 
