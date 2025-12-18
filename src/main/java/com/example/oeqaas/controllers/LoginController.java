@@ -42,14 +42,13 @@ public class LoginController {
             ResultSet sonuc = sorgu.executeQuery();
 
             if (sonuc.next()) {
-                // Kullanıcı Bulundu, Nesne Oluştur
                 User girisYapan = new User(
                         sonuc.getString("AdSoyad"),
                         sonuc.getString("Email"),
                         sonuc.getString("Sifre"),
                         sonuc.getString("Telefon")
                 );
-                girisYapan.setId(sonuc.getInt("KullaniciID")); // ID çok önemli!
+                girisYapan.setId(sonuc.getInt("KullaniciID"));
 
                 DataStore.aktifKullanici = girisYapan;
                 System.out.println("Giriş Başarılı: " + girisYapan.getAdSoyad());
@@ -77,7 +76,7 @@ public class LoginController {
     }
 
     @FXML
-    protected void SifremiUnuttumButonu(ActionEvent event) {
-        DurumEtiketi.setText("Yakında...");
+    protected void SifremiUnuttumButonu(ActionEvent event) throws IOException {
+        SceneManager.sahneDegistir(event, "forget_password-view.fxml");
     }
 }

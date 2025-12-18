@@ -12,73 +12,71 @@
 <?import javafx.scene.shape.Arc?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="851.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oeqaas.controllers.TesterSelectController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="851.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oeqaas.controllers.ArrangementController">
     <children>
         <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="852.0" style="-fx-background-color: #2A363F;">
             <children>
                 <Pane prefHeight="587.0" prefWidth="750.0" style="-fx-background-color: #2A363F;">
                     <children>
-
                         <Label layoutX="298.0" layoutY="594.0" prefHeight="30.0" prefWidth="302.0" text="Quiz &amp; Analysis System ©2025 Tüm hakları saklıdır." textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="DejaVu Sans Mono Bold" size="10.0" />
                             </font>
                         </Label>
-                  <Pane layoutX="15.0" layoutY="17.0" prefHeight="81.0" prefWidth="822.0" style="-fx-background-color: #2dcc74; -fx-background-radius: 5;">
-                     <children>
-                        <Button graphicTextGap="10.0" layoutX="508.0" layoutY="21.0" mnemonicParsing="false" onAction="#testBaslat" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="İstatistiklerim">
-                           <font>
-                              <Font name="Ebrima Bold" size="14.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="34.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/istatistik.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button graphicTextGap="10.0" layoutX="346.0" layoutY="21.0" mnemonicParsing="false" onAction="#testBaslat" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: white; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="Sıralamam">
-                           <font>
-                              <Font name="DejaVu Sans Mono Bold" size="14.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/siralama.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="689.0" layoutY="21.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: #E53935; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Geri" textFill="#ff3434">
-                           <graphic>
-                              <ImageView fitHeight="34.0" fitWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/exit.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                        <Arc fill="#2a363f" layoutX="50.0" layoutY="41.0" length="270.0" radiusX="34.0" radiusY="34.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" style="-fx-rotate: 315;" type="ROUND" />
-                        <ImageView fitHeight="40.0" fitWidth="33.0" layoutX="51.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/icon1.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <TableView fx:id="userTable" layoutX="82.0" layoutY="155.0" onMouseClicked="#userSelected" prefHeight="400.0" prefWidth="688.0" style="-fx-base: #232d34; -fx-control-inner-background: #232d34; -fx-text-fill: white;">
-                     <columns>
-                        <TableColumn fx:id="colName" prefWidth="61.60004425048828" text="Sıralama" />
-                        <TableColumn fx:id="colPass" prefWidth="305.59996032714844" text="Kullanıcı" />
-                        <TableColumn fx:id="colPhone" prefWidth="117.60000610351562" text="Çözdüğü Test Sayısı" />
-                        <TableColumn fx:id="colPhone1" prefWidth="201.60003662109375" text="Başarı Yüzdesi" />
-                     </columns>
-                  </TableView>
-
+                        <Pane layoutX="15.0" layoutY="17.0" prefHeight="81.0" prefWidth="822.0" style="-fx-background-color: #2dcc74; -fx-background-radius: 5;">
+                            <children>
+                                <Button graphicTextGap="10.0" layoutX="508.0" layoutY="21.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="İstatistiklerim">
+                                    <font>
+                                        <Font name="Ebrima Bold" size="14.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="34.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/istatistik.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button graphicTextGap="10.0" layoutX="346.0" layoutY="21.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: white; -fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="Sıralamam">
+                                    <font>
+                                        <Font name="DejaVu Sans Mono Bold" size="14.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/siralama.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="689.0" layoutY="21.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#geriDon" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: #E53935; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Geri" textFill="#ff3434">
+                                    <graphic>
+                                        <ImageView fitHeight="34.0" fitWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/exit.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Arc fill="#2a363f" layoutX="50.0" layoutY="41.0" length="270.0" radiusX="34.0" radiusY="34.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" style="-fx-rotate: 315;" type="ROUND" />
+                                <ImageView fitHeight="40.0" fitWidth="33.0" layoutX="51.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/icon1.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </Pane>
+                        <TableView fx:id="userTable" layoutX="82.0" layoutY="155.0" prefHeight="400.0" prefWidth="688.0" style="-fx-base: #232d34; -fx-control-inner-background: #232d34; -fx-text-fill: white;">
+                            <columns>
+                                <TableColumn fx:id="colName" prefWidth="61.60004425048828" text="Sıralama" />
+                                <TableColumn fx:id="colPass" prefWidth="305.59996032714844" text="Kullanıcı" />
+                                <TableColumn fx:id="colPhone" prefWidth="117.60000610351562" text="Çözdüğü Test Sayısı" />
+                                <TableColumn fx:id="colPhone1" prefWidth="201.60003662109375" text="Başarı Yüzdesi" />
+                            </columns>
+                        </TableView>
                     </children>
                 </Pane>
             </children>

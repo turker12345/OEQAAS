@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,15 +25,16 @@ public class UserTestController {
     @FXML private Label secenekBLabel;
     @FXML private Label secenekCLabel;
     @FXML private Label secenekDLabel;
+    @FXML private TextField txtSoruNo;
 
     private List<Question> currentQuestions;
     private int questionIndex = 0;
     private int dogruSayisi = 0;
     private int yanlisSayisi = 0;
     private String aktifTestAdi = "Genel Test";
+
     @FXML
     public void initialize() {
-        // DataStore'dan seçilen testi al
         if (DataStore.secilenTest != null) {
             aktifTestAdi = DataStore.secilenTest.getAd();
             currentQuestions = DataStore.secilenTest.getSorular();
@@ -64,7 +66,14 @@ public class UserTestController {
     @FXML
     public void cevabiKontrolEt(ActionEvent event) {
         Button tiklananButon = (Button) event.getSource();
-        String verilenCevap = (String) tiklananButon.getUserData();
+        String butonMetni = tiklananButon.getText();
+        String verilenCevap = "";
+
+        if (butonMetni.contains("A")) verilenCevap = "A";
+        else if (butonMetni.contains("B")) verilenCevap = "B";
+        else if (butonMetni.contains("C")) verilenCevap = "C";
+        else if (butonMetni.contains("D")) verilenCevap = "D";
+
         Question mevcutSoru = currentQuestions.get(questionIndex);
 
         if (mevcutSoru.getDogruCevap().equalsIgnoreCase(verilenCevap)) {
@@ -76,8 +85,25 @@ public class UserTestController {
         soruYukle();
     }
 
+    @FXML
+    public void soruyaGit(ActionEvent event) {
+        try {
+            String text = txtSoruNo.getText();
+            if (text != null && !text.isEmpty()) {
+                int hedefSoru = Integer.parseInt(text.trim());
+                if (hedefSoru >= 1 && hedefSoru <= currentQuestions.size()) {
+                    questionIndex = hedefSoru - 1;
+                    soruYukle();
+                } else {
+                    txtSoruNo.clear();
+                }
+            }
+        } catch (NumberFormatException e) {
+            txtSoruNo.clear();
+        }
+    }
+
     private void testiBitir() {
-        // SQL'e Sonuç Kaydı
         if (DataStore.aktifKullanici != null) {
             String sql = "INSERT INTO Sonuclar (KullaniciID, TestAdi, DogruSayisi, YanlisSayisi) VALUES (?, ?, ?, ?)";
 
