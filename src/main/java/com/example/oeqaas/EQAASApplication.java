@@ -7,11 +7,11 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class OEQAASApplication extends Application {
+public class EQAASApplication extends Application {
     @Override
     public void start(Stage anaSahne) throws IOException { // "stage" changed to "anaSahne" (Main Stage)
         DatabaseManager.veritabaniGuncelle();
-        FXMLLoader fxmlYukleyici = new FXMLLoader(OEQAASApplication.class.getResource("login-view.fxml"));
+        FXMLLoader fxmlYukleyici = new FXMLLoader(EQAASApplication.class.getResource("login-view.fxml"));
         Scene sahne = new Scene(fxmlYukleyici.load(), 800, 600); // "scene" changed to "sahne"
         anaSahne.setTitle("Quiz ve Analiz Sistemi");
         // Icon setup
